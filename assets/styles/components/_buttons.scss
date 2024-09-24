@@ -1,0 +1,32 @@
+.generic-button {
+  background-color: $third-color;
+  border: solid 1px $white;
+  color: $dark;
+  padding: 8px 4px;
+  text-align: center;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.success-button {
+  background-color: $success-color;
+  border: solid 1px $third-color;
+  color: $dark;
+  padding: 8px 4px;
+  text-align: center;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.danger-button {
+  background-color: $danger-color;
+  border: solid 1px $third-color;
+  color: $white;
+  padding: 8px 4px;
+  text-align: center;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
