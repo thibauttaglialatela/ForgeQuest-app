@@ -1,0 +1,28 @@
+@import 'base/reset';
+@import 'base/fonts';
+@import 'base/variables';
+@import 'base/typography';
+@import 'base/mixins';
+
+@import 'components/buttons';
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-small;
+  color: $white;
+
+  @include screen-size(desktop) {
+    font-size: $font-family-base;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headings;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-large;
+  color: $white;
+
+  @include screen-size(desktop) {
+    font-size: $font-size-extra-large;
+  }
+}

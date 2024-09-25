@@ -1,0 +1,11 @@
+@mixin screen-size($device) {
+  @if $device == desktop {
+    @media (min-width: 1440px) {
+      @content;
+    }
+  } @else if $device == mobile {
+    @media (max-width: 1339px) {
+      @content;
+    }
+  }
+}
