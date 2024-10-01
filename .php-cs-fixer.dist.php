@@ -9,6 +9,8 @@ $config = new PhpCsFixer\Config();
 return $config
     ->setRiskyAllowed(true) // Active certaines règles considérées comme risquées
     ->setRules([
+        '@PSR12' => true,
+        'strict_param' => true,
         '@Symfony' => true, // Utilisation des règles de codage Symfony
         'array_syntax' => ['syntax' => 'short'], // Utilisation des arrays courts []
         'binary_operator_spaces' => ['default' => 'align_single_space_minimal'], // Aligne les opérateurs binaires
