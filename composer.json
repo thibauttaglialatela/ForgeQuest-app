@@ -38,6 +38,7 @@
         "symfony/string": "7.1.*",
         "symfony/translation": "7.1.*",
         "symfony/twig-bundle": "7.1.*",
+        "symfony/ux-lazy-image": "^2.20",
         "symfony/ux-turbo": "^2.20",
         "symfony/validator": "7.1.*",
         "symfony/web-link": "7.1.*",
@@ -78,6 +79,7 @@
     "scripts": {
         "cs-fix": "php-cs-fixer fix --diff --dry-run",
         "cs-fix-apply": "php-cs-fixer fix",
+        "sass:build": "php bin/console sass:build --watch",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",

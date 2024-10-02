@@ -3,26 +3,53 @@
 @import 'base/variables';
 @import 'base/typography';
 @import 'base/mixins';
-
 @import 'components/buttons';
+@import 'components/card';
+@import "pages/HomePage";
 
-body {
-  font-family: $font-family-base;
-  font-size: $font-size-small;
-  color: $white;
-
+html {
+  font-size: 14px;
   @include screen-size(desktop) {
-    font-size: $font-family-base;
+    font-size: 16px;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  background-color: $primary-color;
+
+  @include screen-size(desktop) {
+    font-size: $font-size-base;
+  }
+}
+
+h1 {
   font-family: $font-family-headings;
   font-weight: $font-weight-bold;
-  font-size: $font-size-large;
+  text-decoration: underline;
   color: $white;
-
+  font-size: $font-size-extra-large;
   @include screen-size(desktop) {
     font-size: $font-size-extra-large;
   }
+}
+
+h2 {
+  font-family: $font-family-headings;
+  font-weight: $font-weight-bold;
+  color: $white;
+  text-decoration: underline;
+}
+p {
+  font-family: $font-family-base;
+  font-weight: $font-weight-normal;
+  color: $white;
+  font-size: $font-size-base
+}
+a {
+  font-family: $font-family-base;
+  font-weight: $font-weight-normal;
+  color: $white;
+  font-size: $font-size-base
 }
