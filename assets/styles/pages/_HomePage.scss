@@ -1,0 +1,128 @@
+section {
+  h1 {
+    text-align: center;
+    margin: 5px 0;
+    @include screen-size(desktop) {
+      font-size: $font-size-extra-large;
+    }
+  }
+
+  article {
+    margin: 5px auto 20px auto;
+    width: 100%;
+    @include screen-size(desktop) {
+      width: 50vw;
+    }
+
+    p {
+      line-height: 1.6;
+      text-align: left;
+      padding: 0 15px;
+      font-size: $font-size-large;
+      @include screen-size(desktop) {
+        font-size: $font-size-large;
+        padding: 0 50px;
+      }
+    }
+  }
+}
+
+.picture-container {
+  img {
+    width: 100%;
+    height: auto;
+    @include screen-size(desktop) {
+      display: block;
+      width: 75%;
+      height: auto;
+      margin: 20px auto 35px auto
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-top: 20px;
+  @include screen-size(desktop) {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .generic-button {
+    width: 100%;
+    @include screen-size(desktop) {
+      width: auto;
+    }
+
+    &:hover {
+      background-color: $third-color-lighter;
+    }
+  }
+}
+
+h2 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+  .scenarios-container {
+    margin-top: 2rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+
+header {
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 6.625vh;
+    background-color: $secondary-color;
+    box-shadow: 0 4px 4px 0 $third-color-lighter;
+
+    a {
+      font-family: $font-family-base;
+      font-size: $font-size-large;
+      color: $white;
+      text-decoration: none;
+      padding: 10px;
+
+      &:last-of-type {
+        margin-left: auto;
+      }
+
+      @include screen-size(desktop) {
+        font-size: $font-size-large;
+      }
+    }
+
+    svg {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
+footer {
+  height: 30px;
+  background-color: $secondary-color;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
