@@ -9,7 +9,7 @@ import './styles/app.scss';
 
 console.log('welcome to AssetMapper! 🎉');
 
-const burgerMenu = document.querySelector('.burger-bar');
+const burgerMenu = document.querySelector('.burger-menu');
 
 burgerMenu.addEventListener('click', () => {
     const navLinks = document.querySelector('.nav-links');

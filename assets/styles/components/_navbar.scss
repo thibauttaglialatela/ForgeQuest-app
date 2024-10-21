@@ -25,13 +25,7 @@ header {
 
       @include screen-size(mobile) {
         display: flex;
-      }
-
-      .burger-bar {
-        width: 100%;
-        height: 4px;
-        background-color: $white;
-        border-radius: 3px;
+        align-items: center;
       }
     }
 
@@ -85,6 +79,11 @@ header {
       color: $white;
       text-decoration: none;
       padding: 10px;
+
+      &.active {
+        color: $third-color;
+        text-decoration: underline;
+      }
 
       &:last-of-type {
         margin-left: auto;
