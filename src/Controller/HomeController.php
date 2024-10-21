@@ -9,9 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/', name: 'app_')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('', name: 'home')]
     public function index(ScenarioRepository $scenarioRepository): Response
     {
         $lastScenarios = $scenarioRepository->findBy([], ['createdAt' => 'DESC'], limit: 3);
