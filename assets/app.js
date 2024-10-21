@@ -7,4 +7,15 @@ import './bootstrap.js';
  */
 import './styles/app.scss';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+console.log('welcome to AssetMapper! 🎉');
+
+const burgerMenu = document.querySelector('.burger-menu');
+
+burgerMenu.addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+});
+
+document.querySelector('.close-menu').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
+});
