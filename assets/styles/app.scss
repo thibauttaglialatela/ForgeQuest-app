@@ -6,6 +6,7 @@
 @import 'components/buttons';
 @import 'components/card';
 @import 'components/navbar';
+@import 'components/footer';
 @import "pages/HomePage";
 
 html {
@@ -16,6 +17,9 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: $font-family-base;
   font-size: $font-size-base;
   background-color: $primary-color;

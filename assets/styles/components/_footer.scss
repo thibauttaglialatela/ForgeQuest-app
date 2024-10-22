@@ -1,0 +1,13 @@
+footer {
+  margin-top: auto;
+  height: 3vh;
+  background-color: $secondary-color;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  @include screen-size(desktop) {
+    height: 5vh;
+  }
+}
