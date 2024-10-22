@@ -7,7 +7,7 @@
         <h1>ForgeQuest</h1>
         <article>
             <p>
-                Créer et partager des scénarios et découvrez les nouveautés proposées par nos membres
+                Créez et partagez vos scénarios de jeux de rôle, et explorez les nouveautés de notre communauté.
             </p>
         </article>
     </section>
@@ -28,57 +28,33 @@
     <h2>Nos derniers scénarios</h2>
     {#    section affichage des dernier scénarios #}
     <section class="scenarios-container">
-{#        {% if last_scenarios is empty %}
+        {% if last_scenarios is empty %}
             <p>Pas de scénarios sur le site en ce moment</p>
-        {% endif %}#}
-        <article class="card">
-            <header>
-                <h3 class="card-title">Titre du scénario</h3>
-            </header>
-            <img src="https://picsum.photos/300/200" alt="description" class="card-image">
-            <section class="card-tags">
-                <ul>
-                    <li class="generic-button">Tags 1</li>
-                    <li class="generic-button">Tags 2</li>
-                    <li class="generic-button">Tags 3</li>
-                </ul>
-            </section>
-            <footer>
-                <a href="#" class="success-button">Découvrir</a>
-            </footer>
-        </article>
-        <article class="card">
-            <header>
-                <h3 class="card-title">Titre du scénario</h3>
-            </header>
-            <img src="https://picsum.photos/300/200" alt="description" class="card-image">
-            <section class="card-tags">
-                <ul>
-                    <li class="generic-button">Tags 1</li>
-                    <li class="generic-button">Tags 2</li>
-                    <li class="generic-button">Tags 3</li>
-                </ul>
-            </section>
-            <footer>
-                <a href="#" class="success-button">Découvrir</a>
-            </footer>
-        </article>
-        <article class="card">
-            <header>
-                <h3 class="card-title">Titre du scénario</h3>
-            </header>
-            <img src="https://picsum.photos/300/200" alt="description" class="card-image">
-            <section class="card-tags">
-                <ul>
-                    <li class="generic-button">Tags 1</li>
-                    <li class="generic-button">Tags 2</li>
-                    <li class="generic-button">Tags 3</li>
-                </ul>
-            </section>
-            <footer>
-                <a href="#" class="success-button">Découvrir</a>
-            </footer>
-        </article>
+        {% else %}
+            {% for scenario in last_scenarios %}
+                <article class="card">
+                    <header>
+                        <h3 class="card-title">{{ scenario.title }}</h3>
+                    </header>
+                    {% if scenario.imageFile is not defined %}
+                        <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
+                             class="card-image">
+                    {% else %}
+                        <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}" class="card-image">
+                    {% endif %}
+                    <section class="card-tags">
+                        <ul>
+                            {% for tag_item in scenario.tag %}
+                                <li class="generic-button">{{ tag_item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                    <footer>
+                        <a href="#" class="success-button">Découvrir</a>
+                    </footer>
+                </article>
+            {% endfor %}
+        {% endif %}
     </section>
 
 {% endblock %}

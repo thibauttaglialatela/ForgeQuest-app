@@ -31,9 +31,26 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
+    @include screen-size(desktop) {
+      gap: 10px;
+    }
   }
 
   footer {
     margin-top: 2rem;
+  }
+
+  .success-button {
+    display: inline-block;
+    &:hover {
+      background-color: darken($success-color, 20%);
+      transform: scale(1.05);
+    }
+  }
+
+  a {
+    text-decoration: none;
+
   }
 }

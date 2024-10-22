@@ -1,7 +1,7 @@
 section {
   h1 {
     text-align: center;
-    margin: 5px 0;
+    margin: 35px 0 15px 0;
     @include screen-size(desktop) {
       font-size: $font-size-extra-large;
     }
@@ -35,7 +35,8 @@ section {
       display: block;
       width: 75%;
       height: auto;
-      margin: 20px auto 35px auto
+      margin: 20px auto 35px auto;
+      border-radius: 10px;
     }
   }
 }
@@ -63,7 +64,7 @@ section {
     }
 
     &:hover {
-      background-color: $third-color-lighter;
+      background-color: darken($third-color, 40%);
     }
   }
 }
