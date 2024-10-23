@@ -1,0 +1,13 @@
+deployment:
+  tasks:
+    - export DEPLOY_PATH=/home/fhor9931/www
+    # Installation des dépendances avec Composer
+    - composer install --no-dev --optimize-autoloader --working-dir=${DEPLOY_PATH}
+    # Exécution des migrations de la base de données (Doctrine)
+    - php ${DEPLOY_PATH}/bin/console doctrine:migrations:migrate --no-interaction
+    # Compilation des assets avec Asset Mapper
+    - php ${DEPLOY_PATH}/bin/console asset-map:compile
+    # Vider le cache en mode production
+    - php ${DEPLOY_PATH}/bin/console cache:clear --env=prod
+    # Mise à jour des permissions pour les répertoires Symfony
+    - chmod -R 775 ${DEPLOY_PATH}/var/cache ${DEPLOY_PATH}/var/log ${DEPLOY_PATH}/var/sessions
