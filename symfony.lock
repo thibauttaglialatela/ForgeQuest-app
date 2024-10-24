@@ -296,6 +296,9 @@
             "config/packages/lazy_image.yaml"
         ]
     },
+    "symfony/ux-toggle-password": {
+        "version": "v2.21.0"
+    },
     "symfony/ux-turbo": {
         "version": "v2.20.0"
     },
@@ -338,6 +341,9 @@
     },
     "symfonycasts/sass-bundle": {
         "version": "v0.7.0"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.17.1"
     },
     "twig/extra-bundle": {
         "version": "v3.13.0"
