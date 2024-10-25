@@ -1,31 +1,10 @@
 
 services:
-###> doctrine/doctrine-bundle ###
-  frankenphp:
-    build: .
-    container_name: frankenphp
-    depends_on:
-      - database
+  mailer:
+    image: axllent/mailpit
     ports:
-      - 8081:80
-    volumes:
-      - .:/var/www/html
-  phpmyadmin:
-    depends_on:
-      - database
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    links:
-      - database
-    restart: unless-stopped
-    ports:
-      - 8888:80
+      - "1025"
+      - "8025"
     environment:
-      MYSQL_ROOT_PASSWORD: MySecretPassword
-      PMA_HOST: database
-
-volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
-
-###< doctrine/doctrine-bundle ###
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
