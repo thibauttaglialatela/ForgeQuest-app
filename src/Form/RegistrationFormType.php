@@ -25,7 +25,8 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('pseudo', TextType::class, [
                 'required'    => false,
-                'label'       => 'Choisissez un pseudo si vous le désirez',
+                'label'       => 'Votre pseudo',
+                'attr'        => ['placeholder' => 'Aragorn64'],
                 'constraints' => [
                     new Length(min: 2,
                         max: 50,
@@ -36,11 +37,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'label'           => 'E-mail',
+                'attr'            => ['placeholder' => 'Aragorn64@exemple.fr'],
                 'invalid_message' => 'Veuillez entrer une adresse e-mail valide',
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped'      => false,
-                'label'       => 'Veuillez lire et accepter notre politique de confidentialité',
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -51,18 +52,22 @@ class RegistrationFormType extends AbstractType
                 'type'            => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'first_options'   => [
-                    'label'              => 'Mot de passe',
-                    'hash_property_path' => 'password',
-                    'toggle'             => true,
-                    'hidden_label'       => 'Masquer',
-                    'visible_label'      => 'Afficher',
+                    'label'                    => 'Mot de passe',
+                    'hash_property_path'       => 'password',
+                    'toggle'                   => true,
+                    'hidden_label'             => 'Masquer',
+                    'visible_label'            => 'Afficher',
+                    'button_classes'           => ['toggle-button'],
+                    'toggle_container_classes' => ['toggle-button-container'],
                 ],
                 'second_options' => [
-                    'label'              => 'Confirmation du mot de passe',
-                    'hash_property_path' => 'password',
-                    'toggle'             => true,
-                    'hidden_label'       => 'Masquer',
-                    'visible_label'      => 'Afficher',
+                    'label'                    => 'Confirmation du mot de passe',
+                    'hash_property_path'       => 'password',
+                    'toggle'                   => true,
+                    'hidden_label'             => 'Masquer',
+                    'visible_label'            => 'Afficher',
+                    'button_classes'           => ['toggle-button'],
+                    'toggle_container_classes' => ['toggle-button-container'],
                 ],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -81,7 +86,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                     new Regex([
-                        'pattern' => "/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[A-Za-z\d!@#$%^&*(),.?\":{}|<>]{12,4096}$/",
+                        'pattern' => "/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{12,4096}$/",
                         'message' => 'Votre mot de passe doit comporter au minimum 12 lettres, une majuscule, un chiffre et un caractére spécial',
                     ]),
                 ],

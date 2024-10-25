@@ -1,0 +1,43 @@
+{%- block form_label -%}
+    {% if label is not empty %}
+        <label class="form-label" for="{{ id }}">{{ label }}</label>
+    {% endif %}
+{%- endblock form_label -%}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="form-error">
+            {% for error in errors %}
+                <p>{{ error.message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form_widget %}
+    <div class="form-widget {{ block('widget_container_attributes') }}">
+        {{- block('form_widget_simple') -}}
+    </div>
+{% endblock %}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    {%- if type == 'range' or type == 'color' -%}
+        {# Attribute "required" is not supported #}
+        {%- set required = false -%}
+    {%- endif -%}
+    <input class="form-widget-simple" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock form_widget_simple -%}
+
+{%- block password_widget -%}
+    {%- set type = type|default('password') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock password_widget -%}
+
+{% block form_help %}
+    {% if help is not empty %}
+        <small class="form-help">{{ help }}</small>
+    {% endif %}
+{% endblock %}
+
+
