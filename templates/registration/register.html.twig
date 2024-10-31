@@ -6,20 +6,42 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.pseudo) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
-    }) }}
-    {{ form_help(registrationForm.plainPassword) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-
-    <button type="submit" class="btn">S'enregistrer</button>
-    {{ form_end(registrationForm) }}
+    <section>
+        <h1>Register</h1>
+<section class="form-container">
+        {{ form_start(registrationForm) }}
+        <div class="form-row">
+            {{ form_label(registrationForm.pseudo) }}
+            {{ form_errors(registrationForm.pseudo) }}
+            {{ form_widget(registrationForm.pseudo) }}
+            {{ form_help(registrationForm.pseudo) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+            {{ form_help(registrationForm.email) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(registrationForm.plainPassword.first) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword.first) }}
+            {{ form_help(registrationForm.plainPassword) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(registrationForm.plainPassword.second) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword.second) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(registrationForm.agreeTerms, null) }}
+            <label class="form-label" for="{{ registrationForm.agreeTerms.vars.id }}">Veuillez lire et accepter notre <a target="_blank" href="#">politique de confidentialité</a></label>
+            {{ form_errors(registrationForm.agreeTerms) }}
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_help(registrationForm.agreeTerms) }}
+        </div>
+        <button type="submit" class="success-button">S'enregistrer</button>
+        {{ form_end(registrationForm) }}
+</section>
+    </section>
 {% endblock %}
