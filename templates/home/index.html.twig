@@ -1,14 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ForgeQuest - Home{% endblock %}
+{% block title %}{{ parent() }} - accueil{% endblock %}
 
 {% block body %}
     <section>
         <h1>ForgeQuest</h1>
         <article>
-            <p>
-                Créez et partagez vos scénarios de jeux de rôle, et explorez les nouveautés de notre communauté.
-            </p>
+            {% if not app.user %}
+                <p>
+                    Créez et partagez vos scénarios de jeux de rôle, et explorez les nouveautés de notre communauté.
+                </p>
+            {% elseif app.user.pseudo %}
+                <p>Bon retour parmi nous {{ app.user.pseudo }}</p>
+            {% else %}
+                <p>Bon retour parmi nous {{ app.user.email }}</p>
+            {% endif %}
         </article>
     </section>
     {#    ajout de l'image #}

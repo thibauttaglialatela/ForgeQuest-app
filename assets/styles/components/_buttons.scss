@@ -33,19 +33,26 @@
   font-weight: $font-weight-bold;
 }
 
+// Conteneur principal du champ mot de passe
 .toggle-button-container {
-  position: relative;;
-  display: flex;
-  flex-direction: column;;
-  align-items: flex-end;
+  position: relative; // Pour positionner le bouton toggle à l'intérieur
+  margin-bottom: 20px; // Espacement entre les champs
+
+  // Champ input
+  input {
+    width: 100%;
+    padding-right: 50px; // Réserver de l'espace pour le bouton toggle
+    box-sizing: border-box; // Assurer que le padding ne dépasse pas la largeur
+  }
+
+  // Bouton toggle
   .toggle-button {
+    position: relative;
     background: none;
     border: none;
-    cursor: pointer;
     color: $third-color;
-    position: absolute;
-    top: -22px;
-    right:0;
+    cursor: pointer;
+    font-size: 0.85rem;
 
     &:hover {
       color: darken($third-color, 50%);
