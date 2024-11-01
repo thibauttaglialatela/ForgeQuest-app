@@ -9,13 +9,19 @@
             <a href="{{ path('app_home') }}" class="{{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
             <a href="#">Explorer les scénarios</a>
             <a href="#">Univers de jeu</a>
-            <a href="#">Se connecter</a>
+            {% if app.user %}
+                <a href="#">Se déconnecter</a>
+            {% else %}
+                <a href="{{ path('app_login') }}"
+                   class="{{ app.request.get('_route') == 'app_login' ? 'active' : '' }}">Se connecter</a>
+            {% endif %}
             <button class="close-menu">&times;</button>
         </section>
 
         <button class="burger-menu" aria-label="burger menu button">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50">
-                <path fill="rgba(255, 200, 87, 1)" d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"></path>
+                <path fill="rgba(255, 200, 87, 1)"
+                      d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"></path>
             </svg>
         </button>
     </nav>
