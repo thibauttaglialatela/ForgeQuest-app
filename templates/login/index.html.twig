@@ -5,20 +5,29 @@
 {% block body %}
     <section>
         <h1>Se connecter</h1>
-            {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <form class="form-container" action="{{ path('app_login') }}" method="post">
-                <div class="form-row">
-                    <label for="username" class="form-label">e-mail</label>
-                    <input class="form-widget-simple" type="text" id="username" name="_username"
-                           value="{{ last_username }}" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input class="form-widget-simple" type="password" id="password" name="_password" required>
-                </div>
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form class="form-container" action="{{ path('app_login') }}" method="post">
+            <div class="form-row">
+                <label for="username" class="form-label">e-mail</label>
+                <input class="form-widget-simple" type="text" id="username" name="_username"
+                       value="{{ last_username }}" required>
+            </div>
+            <div class="toggle-button-container form-row">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input
+                        class="form-widget-simple"
+                        type="password"
+                        id="password"
+                        name="_password"
+                        {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
+                            visibleLabel: 'Afficher',
+                            hiddenLabel: 'Cacher',
+                            buttonClasses: ['toggle-button'],
+                        }) }}
+                        required>
+            </div>
 
                 {# If you want to control the URL the user is redirected to on success
         <input type="hidden" name="_target_path" value="/profile"> #}

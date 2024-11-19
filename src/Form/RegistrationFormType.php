@@ -57,8 +57,8 @@ class RegistrationFormType extends AbstractType
                     'toggle'                   => true,
                     'hidden_label'             => 'Masquer',
                     'visible_label'            => 'Afficher',
-                    'button_classes'           => ['toggle-button'],
                     'toggle_container_classes' => ['toggle-button-container'],
+                    'button_classes'           => ['toggle-button'],
                 ],
                 'second_options' => [
                     'label'                    => 'Confirmation du mot de passe',
@@ -69,8 +69,6 @@ class RegistrationFormType extends AbstractType
                     'button_classes'           => ['toggle-button'],
                     'toggle_container_classes' => ['toggle-button-container'],
                 ],
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr'   => ['autocomplete' => 'new-password'],
                 'help'   => 'Pour être valide, votre mot de passe doit respecter les conditions suivantes :
