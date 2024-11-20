@@ -34,10 +34,11 @@
             {{ form_widget(registrationForm.plainPassword.second) }}
         </div>
         <div class="form-row">
-            {{ form_label(registrationForm.agreeTerms, null) }}
-            <label class="form-label" for="{{ registrationForm.agreeTerms.vars.id }}">Veuillez lire et accepter notre <a target="_blank" href="#">politique de confidentialité</a></label>
+            <label for="{{ registrationForm.agreeTerms.vars.id }}" class="form-label">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                Veuillez lire et accepter notre <a target="_blank" href="#">politique de confidentialité</a>
+            </label>
             {{ form_errors(registrationForm.agreeTerms) }}
-            {{ form_widget(registrationForm.agreeTerms) }}
             {{ form_help(registrationForm.agreeTerms) }}
         </div>
         <button type="submit" class="success-button">S'enregistrer</button>
