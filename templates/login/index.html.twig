@@ -17,24 +17,24 @@
             <div class="form-row">
                 <label for="password" class="form-label">Mot de passe</label>
                 <div class="toggle-password-container">
-                <input
-                        class="form-widget-simple"
-                        type="password"
-                        id="password"
-                        name="_password"
-                        {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
-                            visibleLabel: 'Afficher',
-                            hiddenLabel: 'Cacher',
-                            buttonClasses: ['toggle-password-button'],
-                        }) }}
-                        required>
+                    <input
+                            class="form-widget-simple"
+                            type="password"
+                            id="password"
+                            name="_password"
+                            {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
+                                visibleLabel: 'Afficher',
+                                hiddenLabel: 'Cacher',
+                                buttonClasses: ['toggle-password-button'],
+                            }) }}
+                            required>
                 </div>
             </div>
-        <input type="hidden" name="_target_path" value="/profile">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <p>Pas encore de compte ? <a href="{{ path('app_register') }}">Créez en un ici</a></p>
+{#            <input type="hidden" name="_target_path" value="/profile">#}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <p>Pas encore de compte ? <a href="{{ path('app_register') }}">Créez en un ici</a></p>
 
-                <button type="submit" class="success-button">Se connecter</button>
-            </form>
+            <button type="submit" class="success-button">Se connecter</button>
+        </form>
     </section>
 {% endblock %}
