@@ -34,20 +34,12 @@
 }
 
 // Conteneur principal du champ mot de passe
-.toggle-button-container {
-  position: relative; // Pour positionner le bouton toggle à l'intérieur
-  margin-bottom: 20px; // Espacement entre les champs
+.toggle-password-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 
-  // Champ input
-  input {
-    width: 100%;
-    padding-right: 50px; // Réserver de l'espace pour le bouton toggle
-    box-sizing: border-box; // Assurer que le padding ne dépasse pas la largeur
-  }
-
-  // Bouton toggle
-  .toggle-button {
-    position: relative;
+  .toggle-password-button {
     background: none;
     border: none;
     color: $third-color;
@@ -58,4 +50,14 @@
       color: darken($third-color, 50%);
     }
   }
+
+  // Champ input
+  input {
+    width: 100%;
+    padding-right: 50px; // Réserver de l'espace pour le bouton toggle
+    box-sizing: border-box; // Assurer que le padding ne dépasse pas la largeur
+  }
+
 }
+
+

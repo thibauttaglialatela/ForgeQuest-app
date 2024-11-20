@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 'mapped'      => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter notre politique de confidentialité.',
                     ]),
                 ],
             ])
@@ -57,8 +57,8 @@ class RegistrationFormType extends AbstractType
                     'toggle'                   => true,
                     'hidden_label'             => 'Masquer',
                     'visible_label'            => 'Afficher',
-                    'toggle_container_classes' => ['toggle-button-container'],
-                    'button_classes'           => ['toggle-button'],
+                    'toggle_container_classes' => ['toggle-password-container'],
+                    'button_classes'           => ['toggle-password-button'],
                 ],
                 'second_options' => [
                     'label'                    => 'Confirmation du mot de passe',
@@ -66,8 +66,8 @@ class RegistrationFormType extends AbstractType
                     'toggle'                   => true,
                     'hidden_label'             => 'Masquer',
                     'visible_label'            => 'Afficher',
-                    'button_classes'           => ['toggle-button'],
-                    'toggle_container_classes' => ['toggle-button-container'],
+                    'toggle_container_classes' => ['toggle-password-container'],
+                    'button_classes'           => ['toggle-password-button'],
                 ],
                 'mapped' => false,
                 'attr'   => ['autocomplete' => 'new-password'],

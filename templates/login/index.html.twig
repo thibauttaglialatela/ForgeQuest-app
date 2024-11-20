@@ -14,8 +14,9 @@
                 <input class="form-widget-simple" type="text" id="username" name="_username"
                        value="{{ last_username }}" required>
             </div>
-            <div class="toggle-button-container form-row">
+            <div class="form-row">
                 <label for="password" class="form-label">Mot de passe</label>
+                <div class="toggle-password-container">
                 <input
                         class="form-widget-simple"
                         type="password"
@@ -24,13 +25,12 @@
                         {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
                             visibleLabel: 'Afficher',
                             hiddenLabel: 'Cacher',
-                            buttonClasses: ['toggle-button'],
+                            buttonClasses: ['toggle-password-button'],
                         }) }}
                         required>
+                </div>
             </div>
-
-                {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/profile"> #}
+        <input type="hidden" name="_target_path" value="/profile">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <p>Pas encore de compte ? <a href="{{ path('app_register') }}">Créez en un ici</a></p>
 
