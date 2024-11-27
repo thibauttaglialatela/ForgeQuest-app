@@ -7,7 +7,7 @@
         </svg>
         <section class="nav-links">
             <a href="{{ path('app_home') }}" class="{{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
-            <a href="#">Explorer les scénarios</a>
+            <a href="{{ path('scenario_index') }}" class="{{ app.request.get('_route') == 'scenario_index' ? 'active' : '' }}">Explorer les scénarios</a>
             <a href="#">Univers de jeu</a>
             {% if app.user %}
                 <a href="/logout">Se déconnecter</a>
