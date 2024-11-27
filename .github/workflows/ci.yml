@@ -14,7 +14,7 @@ jobs:
         image: mysql:9.1.0
         env:
           MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: forgequest_db_test
+          MYSQL_DATABASE: forgequest_db
           MYSQL_USER: user_test
           MYSQL_PASSWORD: password_test
         ports:
