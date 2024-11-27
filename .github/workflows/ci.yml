@@ -11,10 +11,10 @@ jobs:
 
     services:
       mysql:
-        image: mysql:9.1.0
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: forgequest_db
+          MYSQL_DATABASE: forgequest_db_test
           MYSQL_USER: user_test
           MYSQL_PASSWORD: password_test
         ports:
@@ -42,7 +42,7 @@ jobs:
 
       - name: Configure .env.test
         run: |
-          echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.37" > .env.test
+          echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0" > .env.test
 
       - name: Run Doctrine migrations
         run: ./bin/console doctrine:migrations:migrate --env=test --no-interaction
@@ -52,7 +52,7 @@ jobs:
 
       - name: Run PHPUnit tests
         env:
-          DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.37
+          DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0
         run: ./bin/phpunit tests
 
       - name: Run PHPstan
