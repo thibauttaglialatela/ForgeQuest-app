@@ -42,7 +42,7 @@ jobs:
 
       - name: Configure .env.test
         run: |
-          echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0" > .env.test
+          echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4" > .env.test
 
       - name: Run Doctrine migrations
         run: ./bin/console doctrine:migrations:migrate --env=test --no-interaction
@@ -52,7 +52,7 @@ jobs:
 
       - name: Run PHPUnit tests
         env:
-          DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0
+          DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4
         run: ./bin/phpunit tests
 
       - name: Run PHPstan
