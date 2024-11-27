@@ -10,6 +10,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class CreateAdminCommandFunctionnalTest extends KernelTestCase
 {
+    protected static function getKernelClass(): string
+    {
+        return \App\Kernel::class;
+    }
+
     public function testExecute(): void
     {
         $kernel      = self::bootKernel();
