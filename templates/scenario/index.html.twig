@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Nos scénarios{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Tous nos scénarios</h1>
+    </section>
+    <section class="card-container">
+        {% if scenarios is empty %}
+            <p>Pas de scénarios sur le site en ce moment</p>
+            {% else %}
+                {% for scenario in scenarios %}
+                    <article class="card">
+                        <header>
+                            <h3 class="card-title">{{ scenario.title }}</h3>
+                        </header>
+                        {% if scenario.imageFile is not defined %}
+                            <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
+                                 class="card-image">
+                        {% else %}
+                            <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}" class="card-image">
+                        {% endif %}
+                        <section class="card-tags">
+                            <ul>
+                                {% for tag_item in scenario.tag %}
+                                    <li class="generic-button">{{ tag_item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        <footer>
+                            <a href="#" class="success-button">Découvrir</a>
+                        </footer>
+                    </article>
+                {% endfor %}
+        {% endif %}
+    </section>
+{% endblock %}

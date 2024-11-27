@@ -10,7 +10,7 @@
 @import "pages/HomePage";
 @import "pages/register";
 @import "components/form";
-
+@import "pages/scenariosPage";
 
 
 html {
@@ -38,7 +38,7 @@ h1 {
   font-weight: $font-weight-bold;
   text-decoration: underline;
   color: $white;
-  font-size: $font-size-extra-large;
+  font-size: $font-size-large;
   @include screen-size(desktop) {
     font-size: $font-size-extra-large;
   }
