@@ -28,7 +28,7 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 $scenario->setResume($faker->paragraph());
 
                 // Fetch the Univers entity reference by its name
-                $univers = $this->getReference('Univers_' . $universName);
+                $univers = $this->getReference('Univers_' . $universName, Univers::class);
                 if ($univers instanceof Univers) {
                     $scenario->setUnivers($univers);
                 }
@@ -40,7 +40,7 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 // Assign multiple random tags from TagFixtures to each Scenario
                 $randomTags = $faker->randomElements(TagFixtures::TAGS, rand(2, 5));
                 foreach ($randomTags as $tagName) {
-                    $tag = $this->getReference('tag_' . $tagName);
+                    $tag = $this->getReference('tag_' . $tagName, Tag::class);
                     if ($tag instanceof Tag) {
                         $scenario->addTag($tag);
                     }

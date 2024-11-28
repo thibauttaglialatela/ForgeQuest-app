@@ -33,7 +33,7 @@ section {
     height: auto;
     @include screen-size(desktop) {
       display: block;
-      width: 75%;
+      width: 50%;
       height: auto;
       margin: 20px auto 35px auto;
       border-radius: 10px;
@@ -48,6 +48,7 @@ section {
   align-items: center;
   gap: 25px;
   margin-top: 20px;
+  margin-bottom: 20px;
   @include screen-size(desktop) {
     flex-direction: row;
     justify-content: space-evenly;
