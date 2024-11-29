@@ -28,7 +28,7 @@
     </section>
     {#    ajout des boutons explorer et Univers de jeu #}
     <section class="buttons-container">
-        <a href="#" class="generic-button">Explorer nos scénarios</a>
+        <a href="{{ path('scenario_index') }}" class="generic-button">Explorer nos scénarios</a>
         <a href="#" class="generic-button">Univers de jeu</a>
     </section>
     <h2>Nos derniers scénarios</h2>
@@ -56,7 +56,7 @@
                         </ul>
                     </section>
                     <footer>
-                        <a href="#" class="success-button">Découvrir</a>
+                        <a href="{{ path('scenario_show', {'id': scenario.id}) }}" class="success-button">Découvrir</a>
                     </footer>
                 </article>
             {% endfor %}

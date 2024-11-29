@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ scenario.title }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>{{ scenario.title }}</h1>
+    </section>
+    <section class="picture-container">
+        <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}">
+    </section>
+    <article class="scenario-resume">
+        <p>{{ scenario.resume }}</p>
+    </article>
+    <section class="buttons-container">
+        <a href="{{ path('scenario_index') }}" class="generic-button">Retour</a>
+    </section>
+{% endblock %}
+
+
+
