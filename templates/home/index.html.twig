@@ -42,7 +42,7 @@
                     <header>
                         <h3 class="card-title">{{ scenario.title }}</h3>
                     </header>
-                    {% if scenario.imageFile is not defined %}
+                    {% if scenario.imageFile is empty %}
                         <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
                              class="card-image">
                     {% else %}
