@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 use App\Entity\Scenario;
 use App\Entity\Tag;
 use App\Entity\Univers;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -22,7 +23,7 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
 
         // Loop through each Univers reference
         foreach (UniversFixtures::UNIVERS as $key => $universName) {
-            for ($i = 0; $i < 2; ++$i) {
+            for ($j = 0; $j < 2; ++$j) {
                 $scenario = new Scenario();
                 $scenario->setTitle($faker->text(50));
                 $scenario->setResume($faker->paragraph());
@@ -32,6 +33,12 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 if ($univers instanceof Univers) {
                     $scenario->setUnivers($univers);
                 }
+                $user = new User();
+                $user->setEmail($faker->email());
+                $user->setPseudo($faker->userName());
+                $user->setPassword($faker->password());
+                $scenario->setAuthor($user);
+
                 $scenario->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-3 months')));
                 $scenario->setImageFile($faker->imageUrl());
                 $scenario->setImageAlt($faker->text(50));
@@ -49,7 +56,7 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 $manager->persist($scenario);
 
                 // Ensure unique reference keys for each scenario
-                $this->addReference(self::SCENARIO_REFERENCE . $key . '-' . $i, $scenario);
+                $this->addReference(self::SCENARIO_REFERENCE . $key . '-' . $j, $scenario);
             }
         }
 
