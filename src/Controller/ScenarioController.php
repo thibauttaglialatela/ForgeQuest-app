@@ -34,7 +34,7 @@ class ScenarioController extends AbstractController
     {
         $scenario = new Scenario();
         /** @var \App\Entity\User $user */
-        $user     = $this->getUser();
+        $user = $this->getUser();
 
         $scenarioForm = $this->createForm(ScenarioFormType::class, $scenario);
         $scenarioForm->handleRequest($request);
