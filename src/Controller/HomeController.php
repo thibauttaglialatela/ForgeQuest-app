@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     #[Route('', name: 'home')]
     public function index(ScenarioRepository $scenarioRepository): Response
     {
-        $lastScenarios = $scenarioRepository->findBy([], ['createdAt' => 'DESC'], limit: 3);
+        $lastScenarios = $scenarioRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], limit: 3);
 
         return $this->render('home/index.html.twig', [
             'last_scenarios' => $lastScenarios,

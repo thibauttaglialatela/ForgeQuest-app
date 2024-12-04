@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -45,6 +47,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, Scenario>
+     */
+    #[ORM\OneToMany(targetEntity: Scenario::class, mappedBy: 'author')]
+    private Collection $Scenarios;
+
+    public function __construct()
+    {
+        $this->Scenarios = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->email ?: '';
+    }
 
     public function getId(): ?int
     {
@@ -141,6 +159,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Scenario>
+     */
+    public function getScenarios(): Collection
+    {
+        return $this->Scenarios;
+    }
+
+    public function addScenario(Scenario $scenario): static
+    {
+        if (!$this->Scenarios->contains($scenario)) {
+            $this->Scenarios->add($scenario);
+            $scenario->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScenario(Scenario $scenario): static
+    {
+        if ($this->Scenarios->removeElement($scenario)) {
+            // set the owning side to null (unless already changed)
+            if ($scenario->getAuthor() === $this) {
+                $scenario->setAuthor(null);
+            }
+        }
 
         return $this;
     }

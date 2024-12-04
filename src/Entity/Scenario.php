@@ -28,7 +28,7 @@ class Scenario
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?bool $isPublished = null;
+    private bool $isPublished = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageFile = null;
@@ -45,6 +45,10 @@ class Scenario
      */
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'scenarios')]
     private Collection $tag;
+
+    #[ORM\ManyToOne(inversedBy: 'Scenarios', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
 
     public function __construct()
     {
@@ -167,5 +171,17 @@ class Scenario
     public function __toString(): string
     {
         return $this->title ?: '';
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

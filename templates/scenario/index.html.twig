@@ -6,16 +6,18 @@
     <section>
         <h1>Tous nos scénarios</h1>
     </section>
-    <section class="card-container">
-        {% if scenarios is empty %}
+    {% if scenarios is empty %}
+        <section>
             <p>Pas de scénarios sur le site en ce moment</p>
-            {% else %}
+        </section>
+    {% endif %}
+    <section class="card-container">
                 {% for scenario in scenarios %}
                     <article class="card">
                         <header>
                             <h3 class="card-title">{{ scenario.title }}</h3>
                         </header>
-                        {% if scenario.imageFile is not defined %}
+                        {% if scenario.imageFile is empty %}
                             <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
                                  class="card-image">
                         {% else %}
@@ -33,6 +35,5 @@
                         </footer>
                     </article>
                 {% endfor %}
-        {% endif %}
     </section>
 {% endblock %}

@@ -9,7 +9,12 @@
         <h1>{{ scenario.title }}</h1>
     </section>
     <section class="picture-container">
-        <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}">
+        {% if scenario.imageFile is empty %}
+            <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
+                 class="card-image">
+        {% else %}
+            <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}" class="card-image">
+        {% endif %}
     </section>
     <article class="scenario-resume">
         <p>{{ scenario.resume }}</p>
