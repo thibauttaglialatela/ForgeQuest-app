@@ -23,7 +23,7 @@ class CreateAdminCommandFunctionnalTest extends KernelTestCase
         $command       = $application->find('app:create_admin_user');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'email'    => 'test@test.com',
+            'email'    => 'john.doe@test.com',
             'password' => 'Password123456',
         ]);
 

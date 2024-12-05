@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Scenario;
+use App\Entity\User;
 use App\Form\ScenarioFormType;
 use App\Repository\ScenarioRepository;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,11 +32,14 @@ class ScenarioController extends AbstractController
 
     #[IsGranted('ROLE_USER', statusCode: 403)]
     #[Route('/add', name: 'create')]
-    public function addScenario(Request $request, EntityManagerInterface $entityManager): Response
+    public function addScenario(Request $request, EntityManagerInterface $entityManager, MailService $mailService): Response
     {
         $scenario = new Scenario();
-        /** @var \App\Entity\User $user */
+        /** @var User $user */
         $user = $this->getUser();
+
+        /** @var User $adminUser */
+        $adminUser = $entityManager->getRepository(User::class)->findOneBy(['roles' => 'ROLE_ADMIN']);
 
         $scenarioForm = $this->createForm(ScenarioFormType::class, $scenario);
         $scenarioForm->handleRequest($request);
@@ -46,6 +51,10 @@ class ScenarioController extends AbstractController
                 $scenario->setAuthor($user);
                 $entityManager->persist($scenario);
                 $entityManager->flush();
+
+                if ($adminUser->getEmail()) {
+                    $mailService->sendMail($adminUser->getEmail(), 'Modération d\'un scénario', 'scenario/validation_scenario.html.twig');
+                }
 
                 $this->addFlash('success', 'Merci pour votre proposition de scénario. Celui-ci sera publié aprés modération de la part de l’administrateur du site.');
 
