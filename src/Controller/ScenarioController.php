@@ -38,8 +38,8 @@ class ScenarioController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        /** @var User $adminUser */
-        $adminUser = $entityManager->getRepository(User::class)->findOneBy(['roles' => 'ROLE_ADMIN']);
+        /** @var User|null $adminUser */
+        $adminUser = $entityManager->getRepository(User::class)->findOneUserByRole('ROLE_ADMIN');
 
         $scenarioForm = $this->createForm(ScenarioFormType::class, $scenario);
         $scenarioForm->handleRequest($request);
@@ -52,8 +52,11 @@ class ScenarioController extends AbstractController
                 $entityManager->persist($scenario);
                 $entityManager->flush();
 
-                if ($adminUser->getEmail()) {
-                    $mailService->sendMail($adminUser->getEmail(), 'Modération d\'un scénario', 'scenario/validation_scenario.html.twig');
+                if (null !== $adminUser) {
+                    $adminUserEmail = $adminUser->getEmail();
+                    if (null !== $adminUserEmail) {
+                        $mailService->sendMail($adminUserEmail, 'Modération d\'un scénario', 'scenario/validation_scenario.html.twig');
+                    }
                 }
 
                 $this->addFlash('success', 'Merci pour votre proposition de scénario. Celui-ci sera publié aprés modération de la part de l’administrateur du site.');

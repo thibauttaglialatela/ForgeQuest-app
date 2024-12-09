@@ -9,8 +9,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ScenarioRepository::class)]
+#[Vich\Uploadable]
 class Scenario
 {
     #[ORM\Id]
@@ -31,7 +35,17 @@ class Scenario
     private bool $isPublished = false;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageFile = null;
+    private ?string $imageName = null;
+
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp']
+    )]
+    #[Vich\UploadableField(mapping: 'scenario_image', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $imageAlt = null;
@@ -108,16 +122,46 @@ class Scenario
         return $this;
     }
 
-    public function getImageFile(): ?string
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            // Force the entity to update
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    public function setImageFile(?string $imageFile): static
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        $this->imageFile = $imageFile;
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     public function getImageAlt(): ?string

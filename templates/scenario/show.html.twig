@@ -9,11 +9,11 @@
         <h1>{{ scenario.title }}</h1>
     </section>
     <section class="picture-container">
-        {% if scenario.imageFile is empty %}
+        {% if scenario.imageName is empty %}
             <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
                  class="card-image">
         {% else %}
-            <img src="{{ scenario.imageFile }}" alt="{{ scenario.imageAlt }}" class="card-image">
+            <img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
         {% endif %}
     </section>
     <article class="scenario-resume">
