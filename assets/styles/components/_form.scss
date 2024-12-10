@@ -48,7 +48,10 @@
   .form-error {
     color: $white;
     background-color: $danger-color;
+    padding: 0.5rem 1rem;
     font-size: 0.875rem;
+    text-align: center;
+    margin: 1.5rem;
   }
 
   .form-help {
