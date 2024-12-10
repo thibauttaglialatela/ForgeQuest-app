@@ -20,4 +20,5 @@ return [
     Symfony\UX\TogglePassword\TogglePasswordBundle::class => ['all' => true],
     DAMA\DoctrineTestBundle\DAMADoctrineTestBundle::class => ['test' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
+    Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
 ];

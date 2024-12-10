@@ -9,12 +9,12 @@ use App\Entity\Tag;
 use App\Entity\Univers;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ScenarioFormType extends AbstractType
 {
@@ -34,9 +34,13 @@ class ScenarioFormType extends AbstractType
                     new NotBlank(message: 'Et le scénario ?'),
                 ],
             ])
-            ->add('imageFile', FileType::class, [
-                'label'    => 'Image',
-                'required' => false,
+            ->add('imageFile', VichFileType::class, [
+                'label'          => 'Image pour illustrer',
+                'required'       => false,
+                'allow_delete'   => true,
+                'download_label' => 'image',
+                'asset_helper'   => true,
+                'delete_label'   => 'supprimer',
             ])
             ->add('imageAlt', TextType::class, [
                 'label'    => 'Texte alternatif',

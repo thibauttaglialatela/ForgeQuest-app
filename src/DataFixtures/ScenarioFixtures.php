@@ -40,7 +40,7 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 $scenario->setAuthor($user);
 
                 $scenario->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-3 months')));
-                $scenario->setImageFile($faker->imageUrl());
+                $scenario->setImageName($faker->imageUrl());
                 $scenario->setImageAlt($faker->text(50));
                 $scenario->setPublished(true);
 
