@@ -51,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Scenario>
      */
-    #[ORM\OneToMany(targetEntity: Scenario::class, mappedBy: 'author')]
+    #[ORM\OneToMany(targetEntity: Scenario::class, mappedBy: 'author', cascade: ['remove'])]
     private Collection $Scenarios;
 
     public function __construct()
