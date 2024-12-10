@@ -12,6 +12,9 @@
             {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('scenario_create') }}" class="{{ app.request.get('_route') == 'scenario_create' ? 'active' : '' }}">Créer un scénario</a>
             {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin') }}" class="{{ app.request.get('_route') == 'admin' ? 'active' : '' }}">Administrer le site</a>
+            {%  endif %}
             {% if app.user %}
                 <a href="/logout">Se déconnecter</a>
             {% else %}
