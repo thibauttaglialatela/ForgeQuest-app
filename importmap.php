@@ -223,4 +223,7 @@ return [
     'color-name' => [
         'version' => '1.1.4',
     ],
+    'chart.js' => [
+        'version' => '3.9.1',
+    ],
 ];

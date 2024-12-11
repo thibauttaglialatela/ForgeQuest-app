@@ -340,6 +340,9 @@
             "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
         }
     },
+    "symfony/ux-chartjs": {
+        "version": "v2.22.1"
+    },
     "symfony/ux-lazy-image": {
         "version": "2.20",
         "recipe": {
