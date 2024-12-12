@@ -28,9 +28,10 @@ class ScenarioCrudController extends AbstractCrudController
         yield DateTimeField::new('createdAt');
         yield BooleanField::new('isPublished');
         yield TextEditorField::new('resume');
-        yield ImageField::new('imageName')
+        yield ImageField::new('imageName', 'Illustration')
             ->setBasePath('uploads/scenarios')
-            ->setUploadDir('public/uploads/scenarios');
+            ->setUploadDir('public/uploads/scenarios')
+            ->setUploadedFileNamePattern('[name]-[randomhash].[extension]');
         yield TextField::new('imageAlt')->onlyOnForms();
         yield AssociationField::new('univers');
         yield AssociationField::new('tag')

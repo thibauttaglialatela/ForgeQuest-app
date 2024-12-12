@@ -9,8 +9,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UniversRepository::class)]
+#[Vich\Uploadable]
 class Univers
 {
     #[ORM\Id]
@@ -25,7 +29,29 @@ class Univers
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageFile = null;
+    private ?string $imageName = null;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    #[Assert\File(
+        maxSize: '2M',
+        maxSizeMessage: 'La taille maximale du fichier est de {{ limit }}',
+        mimeTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'],
+        mimeTypesMessage: 'Le type mime du fichier est invalide ({{ type }}). Les types autorisés sont {{ types }}.',
+    )]
+    #[Vich\UploadableField(mapping: 'univers_image', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $imageAlt = null;
@@ -78,14 +104,14 @@ class Univers
         return $this;
     }
 
-    public function getImageFile(): ?string
+    public function getImageName(): ?string
     {
-        return $this->imageFile;
+        return $this->imageName;
     }
 
-    public function setImageFile(?string $imageFile): static
+    public function setImageName(?string $imageName): static
     {
-        $this->imageFile = $imageFile;
+        $this->imageName = $imageName;
 
         return $this;
     }
@@ -142,5 +168,23 @@ class Univers
         }
 
         return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        if ($imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }

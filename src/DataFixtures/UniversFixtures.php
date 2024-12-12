@@ -26,7 +26,7 @@ final class UniversFixtures extends Fixture
             $univers = new Univers();
             $univers->setName($universName);
             $univers->setDescription($faker->realText());
-            $univers->setImageFile('https://picsum.photos/450/300');
+            $univers->setImageName('https://picsum.photos/450/300');
             $univers->setImageAlt($univers->getName());
             $univers->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-3 months')));
 
