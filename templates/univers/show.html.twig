@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ parent() }} - {{ univers.name }}
+{% endblock %}
+{% block body %}
+    <section>
+        <h1>{{ univers.name}}</h1>
+    </section>
+    <section class="picture-container">
+        {% if univers.imageName is empty %}
+            <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
+                 class="card-image">
+        {% else %}
+            <img src="{{ vich_uploader_asset(univers, 'imageFile') }}" alt="{{ univers.imageAlt }}" class="card-image">
+        {% endif %}
+    </section>
+    <article class="univers-description">
+        <h2>Description de l'univers</h2>
+        <p>{{ univers.description|raw }}</p>
+    </article>
+    <section class="card-container">
+        {% for scenario in univers.scenarios %}
+            <article class="card">
+                <header>
+                    <h3 class="card-title">{{ scenario.title }}</h3>
+                </header>
+                {% if scenario.imageName is empty %}
+                    <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
+                         class="card-image">
+                {% else %}
+                    <img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
+                {% endif %}
+                <section class="card-tags">
+                    <ul>
+                        {% for tag_item in scenario.tag %}
+                            <li class="generic-button">{{ tag_item }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                <footer>
+                    <a href="{{ path('scenario_show', { 'id': scenario.id }) }}" class="success-button">Découvrir</a>
+                </footer>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
