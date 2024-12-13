@@ -22,3 +22,24 @@
     }
   }
 }
+
+.univers-description {
+  h2 {
+    font-family: "Cinzel", serif;
+    font-weight: 600;
+    color: rgb(242, 242, 242);
+    text-decoration: underline;
+    font-size: 2rem;
+  }
+
+  div {
+    color: $white;
+    font-family: $font-family-base;
+    padding: 0 5px;
+    margin-bottom: 20px;
+    @include screen-size(desktop) {
+      width: 75vw;
+      margin: 20px auto;
+    }
+  }
+}

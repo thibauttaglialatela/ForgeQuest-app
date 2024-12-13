@@ -16,7 +16,7 @@
     </section>
     <section class="univers-container">
         {% for univers in univers_list %}
-            <a href="#" class="generic-button">{{ univers.name }}</a>
+            <a href="{{ path('univers_show', { 'id': univers.id }) }}" class="generic-button">{{ univers.name }}</a>
         {% endfor %}
     </section>
 {% endblock %}
