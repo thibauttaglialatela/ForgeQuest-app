@@ -8,7 +8,7 @@
         <section class="nav-links">
             <a href="{{ path('app_home') }}" class="{{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
             <a href="{{ path('scenario_index') }}" class="{{ app.request.get('_route') == 'scenario_index' ? 'active' : '' }}">Explorer les scénarios</a>
-            <a href="#">Univers de jeu</a>
+            <a href="{{ path('univers_index') }}" class="{{ app.request.get('_route') == 'univers_index' ? 'active' : '' }}">Univers de jeu</a>
             {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('scenario_create') }}" class="{{ app.request.get('_route') == 'scenario_create' ? 'active' : '' }}">Créer un scénario</a>
             {% endif %}
