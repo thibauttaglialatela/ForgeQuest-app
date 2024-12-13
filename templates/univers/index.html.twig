@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Univers de jeu{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Univers de jeu</h1>
+    </section>
+    <section class="picture-container">
+        <img
+                srcset="{{ asset('images/Univers_page_640.webp') }} 640w,
+                {{ asset('images/Univers_page_1280.webp') }} 1280w"
+                src="{{ asset('images/Univers_page_640.webp') }}"
+                alt="Chateau fort émergent d'une mer de nuages"
+        />
+    </section>
+    <section class="univers-container">
+        {% for univers in univers_list %}
+            <a href="#" class="generic-button">{{ univers.name }}</a>
+        {% endfor %}
+    </section>
+{% endblock %}

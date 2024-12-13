@@ -1,0 +1,24 @@
+.univers-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin: 2rem 0;
+
+  @include screen-size(desktop) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .generic-button {
+    width: 100%;
+    @include screen-size(desktop) {
+      width: auto;
+    }
+
+    &:hover {
+      background-color: darken($third-color, 40%);
+      color: $white;
+    }
+  }
+}
