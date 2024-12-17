@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Profil de  {{ app.user.pseudo }}{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Page de {{ app.user.pseudo }}</h1>
+</section>
+    <section>
+        <h2>Mes scénarios</h2>
+        {{ dump(scenario_list) }}
+        <table>
+            <thead>
+            <tr>
+                <th>Titre du scénario</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for scenario in scenario_list %}
+                <tr>
+                    <td>{{ scenario.title }}</td>
+                    <td>
+                        <a href="#" class="button success-button">Modifier</a>
+                        <a href="#" class="button danger-button">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

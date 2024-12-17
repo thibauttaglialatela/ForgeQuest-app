@@ -43,23 +43,26 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
+      - name: Build SCSS file
+        run: ./bin/console sass:build
+
       - name: Configure .env.test
         run: |
           echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4" > .env.test
 
       - name: Run Doctrine migrations
         env:
-          KERNEL_CLASS: "App\Kernel"
+          KERNEL_CLASS: 'App\Kernel'
         run: ./bin/console doctrine:migrations:migrate --env=test --no-interaction
 
       - name: Run fixtures
         env:
-          KERNEL_CLASS: "App\Kernel"
+          KERNEL_CLASS: 'App\Kernel'
         run: ./bin/console doctrine:fixtures:load --env=test --no-interaction
 
       - name: Run PHPUnit tests
         env:
-          KERNEL_CLASS: "App\Kernel"
+          KERNEL_CLASS: 'App\Kernel'
           DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4
         run: ./bin/phpunit tests
 

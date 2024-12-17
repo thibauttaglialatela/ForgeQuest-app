@@ -1,0 +1,52 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  @include screen-size(desktop) {
+    margin: auto;
+    width: 50%;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+  }
+
+  th {
+    background-color: $secondary-color;
+    color: $white;
+    font-family: $font-family-base;
+  }
+
+  td {
+    color: $white;
+    font-family: $font-family-base;
+  }
+
+  tbody tr {
+    &:nth-child(even) {
+      background-color: lighten($secondary-color, 10%);
+    }
+  }
+}
+
+
+tr td:last-child {
+  display: flex;
+  flex-direction: column;
+  height: 14vh;
+  align-items: center;
+  justify-content: space-evenly;
+
+  @include screen-size(desktop) {
+    flex-direction: row;
+  }
+}
+
+section {
+  h2 {
+    text-align: left;
+  }
+}
