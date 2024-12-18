@@ -83,3 +83,21 @@ a {
   }
 }
 
+.flash-danger {
+  width: 100%;
+  height: fit-content;
+  background-color: $danger-color;
+  color: $white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: $third-color-lighter 0 4px 10px 0;
+  border: 1px solid lighten($success-color, 10%);
+  font-size: $font-size-base;
+  text-align: center;
+  line-height: 1.5;
+
+  @include screen-size(desktop) {
+    width: 75%;
+    margin: auto;
+  }
+}

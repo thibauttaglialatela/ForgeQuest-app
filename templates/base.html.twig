@@ -16,10 +16,12 @@
 </head>
 <body>
 {{ include('/_navbar.html.twig') }}
-{% for message in app.flashes('success') %}
-    <div class="flash-success">
-        {{ message }}
-    </div>
+{% for label, messages in app.flashes(['success', 'danger']) %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endfor %}
 {% block body %}{% endblock %}
 {{ include('/_footer.html.twig') }}
