@@ -32,7 +32,7 @@ class Scenario
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private bool $isPublished = false;
+    public bool $isPublished = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
@@ -108,11 +108,6 @@ class Scenario
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    public function isPublished(): ?bool
-    {
-        return $this->isPublished;
     }
 
     public function setPublished(bool $isPublished): static
