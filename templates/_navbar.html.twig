@@ -11,6 +11,7 @@
             <a href="{{ path('univers_index') }}" class="{{ app.request.get('_route') == 'univers_index' ? 'active' : '' }}">Univers de jeu</a>
             {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('scenario_create') }}" class="{{ app.request.get('_route') == 'scenario_create' ? 'active' : '' }}">Créer un scénario</a>
+                <a href="{{ path('app_profile') }}" class="{{ app.request.get('_route') == 'app_profile' ? 'active' : '' }}">Mon profil</a>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('admin') }}" class="{{ app.request.get('_route') == 'admin' ? 'active' : '' }}">Administrer le site</a>

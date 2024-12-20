@@ -3,12 +3,11 @@
 {% block title %}{{ parent() }} - Profil de  {{ app.user.pseudo }}{% endblock %}
 
 {% block body %}
-<section>
-    <h1>Page de {{ app.user.pseudo }}</h1>
-</section>
+    <section>
+        <h1>Page de {{ app.user.pseudo }}</h1>
+    </section>
     <section>
         <h2>Mes scénarios</h2>
-        {{ dump(scenario_list) }}
         <table>
             <thead>
             <tr>
@@ -22,12 +21,22 @@
                     <td>{{ scenario.title }}</td>
                     <td>
                         <a href="#" class="button success-button">Modifier</a>
-                        <a href="#" class="button danger-button">Supprimer</a>
+                        <form action="{{ path('scenario_delete', {'id': scenario.id}) }}" method="post"
+                              class="delete-form" data-id="{{ scenario.id }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ scenario.id) }}">
+                            <button type="button" class="button danger-button delete-button">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
+        <div id="popup-delete" class="hidden popup-delete">
+            <div class="confirm-dialog">
+                <p>Voulez-vous supprimer ce scénario ?</p>
+                <button id="confirm-yes" class="danger-button">Oui</button>
+                <button id="confirm-no" class="generic-button">Non</button>
+            </div>
+        </div>
     </section>
 {% endblock %}

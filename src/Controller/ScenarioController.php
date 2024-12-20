@@ -77,4 +77,29 @@ class ScenarioController extends AbstractController
     ): Response {
         return $this->render('scenario/show.html.twig', ['scenario' => $scenario]);
     }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    #[IsGranted('delete', 'scenario', message: 'Uniquement pour l\'auteur du scénario')]
+    public function deleteScenario(
+        #[MapEntity(message: 'Le scénario n \'existe pas')]
+        Scenario $scenario,
+        EntityManagerInterface $entityManager,
+        Request $request,
+    ): Response {
+        $token = $request->query->get('token');
+        if (!is_string($token)) {
+            $this->addFlash('danger', 'Token CSRF non valide');
+
+            return $this->redirectToRoute('scenario_index');
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $scenario->getId(), $token)) {
+            $entityManager->remove($scenario);
+            $entityManager->flush();
+        }
+
+        $this->addFlash('danger', 'Le scénario a été supprimé');
+
+        return $this->redirectToRoute('app_profile');
+    }
 }
