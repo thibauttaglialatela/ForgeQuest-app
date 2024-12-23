@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} - page introuvable erreur 404{% endblock %}
+{% block body %}
+    <section class="error-page">
+        <h1>Erreur 404 - {{ exception.message }}</h1>
+        <p>Oups ! La page que vous cherchez n'existe pas.</p>
+        <a href="{{ path('app_home') }}" class="generic-button">Retour à la page d'accueil</a>
+    </section>
+{% endblock %}

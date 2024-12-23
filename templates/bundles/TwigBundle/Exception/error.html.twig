@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Erreur {{ exception.code }}
+{% endblock %}
+
+{% block body %}
+    <section class="error-page">
+        <h1>Erreur {{ exception.code }} - Une erreur est survenue</h1>
+        <p>Nous sommes désolés, mais une erreur s'est produite. Veuillez réessayer plus tard.</p>
+        <a href="{{ path('app_home') }}" class="generic-button">Retour à la page d'accueil</a>
+    </section>
+{% endblock %}
+

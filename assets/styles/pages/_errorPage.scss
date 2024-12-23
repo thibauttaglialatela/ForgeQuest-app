@@ -1,0 +1,27 @@
+.error-page {
+  text-align: center;
+  background-color: rgb(242, 242, 242);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  h1 {
+    font-size: 3em;
+    color: $danger-color;
+  }
+
+  p {
+    font-size: 1.5em;
+    color: #555;
+  }
+
+  .generic-button {
+    width: 100%;
+
+    @include screen-size(desktop) {
+      width: fit-content;
+    }
+  }
+}
