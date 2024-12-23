@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ scenario.title }}</td>
                     <td>
-                        <a href="#" class="button success-button">Modifier</a>
+                        <a href="{{ path('scenario_update', {'id': scenario.id}) }}" class="button success-button">Modifier</a>
                         <form action="{{ path('scenario_delete', {'id': scenario.id}) }}" method="post"
                               class="delete-form" data-id="{{ scenario.id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ scenario.id) }}">
