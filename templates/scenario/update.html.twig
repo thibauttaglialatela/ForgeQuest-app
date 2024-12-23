@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Mise à jour de {{ scenario.title }}</h1>
+    </section>
+    <section class="form-container">
+        {{ form_start(scenario_form) }}
+        <div class="form-row">
+            {{ form_label(scenario_form.title) }}
+            {{ form_errors(scenario_form.title) }}
+            {{ form_widget(scenario_form.title) }}
+            {{ form_help(scenario_form.title) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(scenario_form.resume) }}
+            {{ form_errors(scenario_form.resume) }}
+            {{ form_widget(scenario_form.resume) }}
+            {{ form_help(scenario_form.resume) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(scenario_form.univers) }}
+            {{ form_errors(scenario_form.univers) }}
+            {{ form_widget(scenario_form.univers) }}
+            {{ form_help(scenario_form.univers) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(scenario_form.imageFile) }}
+            {{ form_errors(scenario_form.imageFile) }}
+            {{ form_widget(scenario_form.imageFile) }}
+            {{ form_help(scenario_form.imageFile) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(scenario_form.imageAlt) }}
+            {{ form_errors(scenario_form.imageAlt) }}
+            {{ form_widget(scenario_form.imageAlt) }}
+            {{ form_help(scenario_form.imageAlt) }}
+        </div>
+        <div class="form-row">
+            {{ form_label(scenario_form.tag) }}
+            {{ form_errors(scenario_form.tag) }}
+            {{ form_widget(scenario_form.tag) }}
+            {{ form_help(scenario_form.tag) }}
+        </div>
+        <button type="submit" class="success-button">Mettre à jour</button>
+        {{ form_end(scenario_form) }}
+    </section>
+{% endblock %}
+{% block title %}
+    {{ parent() }} - Mise à jour {{ scenario.title }}
+{% endblock %}
+

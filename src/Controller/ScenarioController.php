@@ -102,4 +102,29 @@ class ScenarioController extends AbstractController
 
         return $this->redirectToRoute('app_profile');
     }
+
+    #[Route('/update/{id}', name: 'update')]
+    #[IsGranted('edit', 'scenario', message: 'Uniquement pour l\'auteur du scénario')]
+    public function updateScenario(
+        #[MapEntity(message: 'Le scénario n\'existe pas')]
+        Scenario $scenario,
+        Request $request,
+        EntityManagerInterface $entityManager,
+    ): Response {
+        $scenarioForm = $this->createForm(ScenarioFormType::class, $scenario);
+        $scenarioForm->handleRequest($request);
+
+        if ($scenarioForm->isSubmitted() && $scenarioForm->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Scénario mis à jour avec succès.');
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('scenario/update.html.twig', [
+            'scenario_form' => $scenarioForm,
+            'scenario'      => $scenario,
+        ]);
+    }
 }
