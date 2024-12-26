@@ -3,6 +3,7 @@ twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
         - 'form/my_form_theme.html.twig'
+    exception_controller: null
 
 when@test:
     twig:
