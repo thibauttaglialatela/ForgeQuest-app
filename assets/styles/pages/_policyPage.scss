@@ -1,0 +1,17 @@
+.policy-container {
+  width: auto;
+  margin: 5px auto;
+  @include screen-size(desktop) {
+    width: 75vw;
+  }
+  h1 {
+    text-align: center;
+    font-family: $font-family-headings;
+  }
+
+  p {
+    text-align: left;
+    font-family: $font-family-base;
+    margin: 0.5rem 0;
+  }
+}

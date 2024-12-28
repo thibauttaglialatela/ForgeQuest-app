@@ -13,6 +13,7 @@
 @import "pages/UniversPage";
 @import "pages/ProfilePage";
 @import "pages/errorPage";
+@import "pages/policyPage";
 
 
 html {
@@ -62,7 +63,6 @@ a {
   font-family: $font-family-base;
   font-weight: $font-weight-normal;
   color: $white;
-  font-size: $font-size-base
 }
 
 .flash-success {
@@ -101,4 +101,36 @@ a {
     width: 75%;
     margin: auto;
   }
+}
+ol {
+  list-style: decimal inside;
+  padding: 5px 10px;
+  li {
+    font-family: $font-family-base;
+    color: $white;
+    font-size: $font-size-base;
+    @include screen-size(desktop) {
+      font-size: $font-size-extra-large;
+    }
+    margin-top: 5px;
+  }
+}
+
+ul {
+  list-style: disc inside;
+  li {
+    font-family: $font-family-base;
+    color: $white;
+    font-size: $font-size-base;
+    @include screen-size(desktop) {
+      font-size: $font-size-large;
+    }
+    text-decoration: none;
+  }
+}
+
+
+
+strong {
+  font-weight: $font-weight-bold;
 }
