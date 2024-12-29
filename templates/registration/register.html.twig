@@ -36,7 +36,7 @@
             <div class="form-row">
                 <label for="{{ registrationForm.agreeTerms.vars.id }}" class="form-label">
                     {{ form_widget(registrationForm.agreeTerms) }}
-                    Veuillez lire et accepter notre <a target="_blank" href="#">politique de confidentialité</a>
+                    Veuillez lire et accepter notre <a target="_blank" href="{{ path('app_policy') }}">politique de confidentialité</a>
                 </label>
                 {{ form_errors(registrationForm.agreeTerms) }}
                 {{ form_help(registrationForm.agreeTerms) }}
