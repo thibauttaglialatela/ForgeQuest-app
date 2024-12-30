@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Repository\ReviewRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
 class Review
@@ -17,13 +18,29 @@ class Review
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Un commentaire est obligatoire')]
     private ?string $comment = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Votre note est obligatoire')]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'La note doit être comprise entre {{ min }} et {{ max }}.',
+    )]
     private ?int $grade = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    private ?Scenario $Scenario = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    private ?User $author = null;
+
+    #[ORM\Column]
+    private ?bool $isPublished = null;
 
     public function getId(): ?int
     {
@@ -62,6 +79,42 @@ class Review
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getScenario(): ?Scenario
+    {
+        return $this->Scenario;
+    }
+
+    public function setScenario(?Scenario $Scenario): static
+    {
+        $this->Scenario = $Scenario;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

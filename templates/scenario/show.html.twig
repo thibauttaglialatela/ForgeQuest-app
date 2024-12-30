@@ -19,6 +19,11 @@
     <article class="scenario-resume">
         <p>{{ scenario.resume }}</p>
     </article>
+    {% if app.user %}
+        <section class="buttons-container">
+        <a href="{{ path('scenario_add_review', {'id': scenario.id}) }}" class="success-button">Ajouter un commentaire</a>
+        </section>
+    {% endif %}
     <section class="buttons-container">
         <a href="{{ path('scenario_index') }}" class="generic-button">Retour</a>
     </section>
