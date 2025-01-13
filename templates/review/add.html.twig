@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - ajout d'un commentaire{% endblock %}
+
+{% block body %}
+<section class="form-container">
+    <h2>Laisser un commentaire et une note</h2>
+    {{ form_start(review_form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {# Affiche les erreurs globales #}
+    <div class="form-row">
+        {{ form_label(review_form.comment) }}
+        {{ form_errors(review_form.comment) }}
+        {{ form_widget(review_form.comment) }}
+        {{ form_help(review_form.comment) }}
+    </div>
+    <div class="form-row">
+        {{ form_label(review_form.grade) }}
+        {{ form_errors(review_form.grade) }}
+        {{ form_widget(review_form.grade) }}
+        {{ form_help(review_form.grade) }}
+    </div>
+    <button type="submit" class="success-button">Laisser un commentaire</button>
+    {{ form_end(review_form) }}
+</section>
+    <section class="buttons-container">
+        <a href="{{ path('scenario_show', {'id': scenario.id}) }}" class="generic-button">Annuler</a>
+    </section>
+{% endblock %}

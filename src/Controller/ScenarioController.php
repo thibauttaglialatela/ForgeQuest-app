@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Review;
 use App\Entity\Scenario;
 use App\Entity\User;
+use App\Form\ReviewType;
 use App\Form\ScenarioFormType;
 use App\Repository\ScenarioRepository;
 use App\Service\MailService;
@@ -74,8 +76,51 @@ class ScenarioController extends AbstractController
     public function showOneScenario(
         #[MapEntity(message: 'Le scénario n\'existe pas')]
         Scenario $scenario,
+        Request $request,
     ): Response {
-        return $this->render('scenario/show.html.twig', ['scenario' => $scenario]);
+        $review     = new Review();
+        $reviewForm = $this->createForm(ReviewType::class, $review, [
+            'action' => $this->generateUrl('scenario_add_review', ['id' => $scenario->getId()]),
+            'method' => 'POST',
+        ]);
+
+        return $this->render('scenario/show.html.twig', [
+            'scenario'    => $scenario,
+            'review_form' => $reviewForm,
+        ]);
+    }
+
+    #[IsGranted('ROLE_USER', statusCode: 403)]
+    #[Route('/{id}/review', name: 'add_review', methods: ['GET', 'POST'])]
+    public function addReview(Request $request, EntityManagerInterface $entityManager, Scenario $scenario): Response
+    {
+        $review = new Review();
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $reviewForm = $this->createForm(ReviewType::class, $review);
+        $reviewForm->handleRequest($request);
+
+        if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
+            $review = $reviewForm->getData();
+            if ($review instanceof Review) {
+                $review->setAuthor($user);
+                $review->setCreatedAt(new \DateTimeImmutable());
+                $review->setScenario($scenario);
+                $review->setPublished(false);
+                $entityManager->persist($review);
+                $entityManager->flush();
+            }
+
+            $this->addFlash('success', 'Merci pour votre commentaire. Celui-ci sera publié aprés modération');
+
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
+        }
+
+        return $this->render('review/add.html.twig', [
+            'review_form' => $reviewForm,
+            'scenario'    => $scenario,
+        ]);
     }
 
     #[Route('/delete/{id}', name: 'delete')]
