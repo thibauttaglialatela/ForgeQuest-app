@@ -34,7 +34,7 @@ class Review
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
-    private ?Scenario $Scenario = null;
+    private ?Scenario $scenario = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?User $author = null;
@@ -85,12 +85,12 @@ class Review
 
     public function getScenario(): ?Scenario
     {
-        return $this->Scenario;
+        return $this->scenario;
     }
 
-    public function setScenario(?Scenario $Scenario): static
+    public function setScenario(?Scenario $scenario): static
     {
-        $this->Scenario = $Scenario;
+        $this->scenario = $scenario;
 
         return $this;
     }

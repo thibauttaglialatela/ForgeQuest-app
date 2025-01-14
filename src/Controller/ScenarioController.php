@@ -9,6 +9,7 @@ use App\Entity\Scenario;
 use App\Entity\User;
 use App\Form\ReviewType;
 use App\Form\ScenarioFormType;
+use App\Repository\ReviewRepository;
 use App\Repository\ScenarioRepository;
 use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -120,6 +121,16 @@ class ScenarioController extends AbstractController
         return $this->render('review/add.html.twig', [
             'review_form' => $reviewForm,
             'scenario'    => $scenario,
+        ]);
+    }
+
+    #[Route('/{scenario_id}/all-reviews', name: 'reviews')]
+    public function showAllReviews(ReviewRepository $reviewRepository, int $scenario_id): Response
+    {
+        $reviews = $reviewRepository->findBy(['scenario' => $scenario_id, 'isPublished' => true]);
+
+        return $this->render('review/_show_all_reviews.html.twig', [
+            'reviews' => $reviews,
         ]);
     }
 

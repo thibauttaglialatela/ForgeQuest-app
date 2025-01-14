@@ -40,8 +40,6 @@ final class ScenarioFixtures extends Fixture implements DependentFixtureInterfac
                 $scenario->setAuthor($user);
 
                 $scenario->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-3 months')));
-                $scenario->setImageName($faker->imageUrl());
-                $scenario->setImageAlt($faker->text(50));
                 $scenario->setPublished(true);
 
                 // Assign multiple random tags from TagFixtures to each Scenario

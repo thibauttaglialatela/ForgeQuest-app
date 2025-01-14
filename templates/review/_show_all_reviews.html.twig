@@ -1,0 +1,24 @@
+{% block body %}
+    <section>
+        <h2>Commentaires</h2>
+    </section>
+<section class="reviews-container">
+    {% if reviews is not empty  %}
+    {% for review in reviews %}
+{#    {{ dump(review) }}#}
+        <article class="review-card">
+            <div class="review-card_header">
+                <span class="review-card_author">Auteur : {{ review.author }}</span>
+                <span class="review-card_date">Créé le {{ review.createdAt|date('d F Y', 'Europe/Paris') }}</span>
+            </div>
+            <div class="review-card_content">
+                <p>{{ review.comment }}</p>
+            </div>
+            <div class="review-card_footer">
+                <span class="review-card_grade">Note : {{ review.grade }}</span>
+            </div>
+        </article>
+    {% endfor %}
+    {% endif %}
+</section>
+{% endblock %}
