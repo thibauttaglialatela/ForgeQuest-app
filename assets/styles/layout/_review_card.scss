@@ -1,0 +1,50 @@
+.review-card {
+  p {
+    text-align: left;
+    color: $dark;
+  }
+  display: grid;
+  grid-template-rows: auto 1fr auto; // Header, Content, Footer
+  gap: 1rem;
+  background-color: $third-color-lighter;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 100vw;
+  color: $dark;
+
+  .review-card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: $dark;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .review-card_content {
+    flex-grow: 1;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    color: $dark;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+
+  &__author,
+  &__date {
+    font-weight: bold;
+  }
+
+  &__grade {
+    color: $dark;
+  }
+}

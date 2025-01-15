@@ -67,7 +67,7 @@ class Scenario
     /**
      * @var Collection<int, Review>
      */
-    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'Scenario')]
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'scenario')]
     private Collection $reviews;
 
     public function __construct()
