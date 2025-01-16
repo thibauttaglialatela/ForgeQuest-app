@@ -112,6 +112,13 @@ class Review
         return $this->isPublished;
     }
 
+    public function setIsPublished(?bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
     public function setPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;

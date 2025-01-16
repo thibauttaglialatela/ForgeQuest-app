@@ -58,7 +58,7 @@ class CreateAdminUserCommand extends Command
             $adminUser->setPassword($this->passwordHasher->hashPassword($adminUser, $plainPassword));
             $adminUser->setRoles(['ROLE_ADMIN']);
             $adminUser->setPseudo('Dungeon Master');
-            $adminUser->setVerified(true);
+            $adminUser->setIsVerified(true);
 
             $this->entityManager->persist($adminUser);
             $this->entityManager->flush();

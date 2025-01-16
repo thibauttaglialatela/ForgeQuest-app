@@ -20,7 +20,7 @@ final class UserFixtures extends Fixture
             $user->setEmail($faker->email());
             $user->setPassword($faker->password());
             $user->setPseudo($faker->userName());
-            $user->setVerified(true);
+            $user->setIsVerified(true);
 
             $manager->persist($user);
 
