@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 use App\Entity\Tag;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -22,6 +23,8 @@ class TagCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return parent::configureActions($actions)
+            ->update(Crud::PAGE_INDEX, Action::NEW,
+                fn (Action $action) => $action->setLabel('Ajouter un mot-clé'))
             ->disable(Action::DETAIL);
     }
 
@@ -30,7 +33,17 @@ class TagCrudController extends AbstractCrudController
         yield IdField::new('id');
         yield TextField::new('name');
         yield CollectionField::new('scenarios')
-            ->setFormTypeOption('choice_label', 'title')
-            ->setFormTypeOption('expanded', true);
+            ->allowDelete(false)
+        ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->renderContentMaximized()
+            ->setPageTitle('index', 'Liste des mots-clés')
+            ->setPageTitle('detail', 'Un mot-clé')
+            ->setPageTitle('edit', 'Modifier un mot-clé')
+        ;
     }
 }

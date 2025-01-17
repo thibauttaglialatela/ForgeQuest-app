@@ -43,6 +43,7 @@ final class ReviewCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->renderContentMaximized()
             ->setPageTitle('index', 'Liste des commentaires')
             ->setPageTitle('detail', 'Un commentaire')
             ->setPageTitle('edit', 'Modifier un commentaire')

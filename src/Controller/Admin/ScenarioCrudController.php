@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Scenario;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -19,6 +22,14 @@ class ScenarioCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Scenario::class;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->update(Crud::PAGE_INDEX, Action::NEW,
+                fn (Action $action) => $action->setLabel('Ajouter un scénario'))
+        ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -38,5 +49,16 @@ class ScenarioCrudController extends AbstractCrudController
             ->setFormTypeOption('choice_label', 'name')
             ->setFormTypeOption('multiple', true)
             ->setFormTypeOption('expanded', true);
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('new', 'Ajouter un scénario')
+            ->setPageTitle('index', 'Liste des scénarios')
+            ->setPageTitle('detail', 'Un scénario')
+            ->setPageTitle('edit', 'Modifier un scénario')
+            ->renderContentMaximized()
+        ;
     }
 }
