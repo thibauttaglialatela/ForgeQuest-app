@@ -50,6 +50,16 @@ jobs:
         run: |
           echo "DATABASE_URL=mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4" > .env.test
 
+      - name: Drop test database
+        env:
+          KERNEL_CLASS: 'App\Kernel'
+        run: ./bin/console doctrine:database:drop --force --env=test || true
+
+      - name: Create test database
+        env:
+          KERNEL_CLASS: 'App\Kernel'
+        run: ./bin/console doctrine:database:create --env=test
+
       - name: Run Doctrine migrations
         env:
           KERNEL_CLASS: 'App\Kernel'

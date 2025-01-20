@@ -18,6 +18,21 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
+    public function calculateScenarioAverageGrade(int $id): ?int
+    {
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
+
+        $queryBuilder->select('ROUND(AVG(r.grade), 0) AS average_grade')
+        ->from('review', 'r')
+        ->where('r.scenario_id = :id')
+        ->andWhere('r.is_published = TRUE')
+        ->setParameter('id', $id);
+
+        $result = $queryBuilder->executeQuery()->fetchOne();
+
+        return null !== $result ? (int) $result : null;
+    }
+
     //    /**
     //     * @return Review[] Returns an array of Review objects
     //     */

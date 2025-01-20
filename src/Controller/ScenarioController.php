@@ -77,17 +77,24 @@ class ScenarioController extends AbstractController
     public function showOneScenario(
         #[MapEntity(message: 'Le scénario n\'existe pas')]
         Scenario $scenario,
-        Request $request,
+        ReviewRepository $reviewRepository,
     ): Response {
         $review     = new Review();
         $reviewForm = $this->createForm(ReviewType::class, $review, [
             'action' => $this->generateUrl('scenario_add_review', ['id' => $scenario->getId()]),
             'method' => 'POST',
         ]);
+        // todo: Parameter #1 $id of method App\Repository\ReviewRepository::calculateScenarioAverageGrade() expects int, int|null given.
+        if ($scenario->getId()) {
+            $averageGrade = $reviewRepository->calculateScenarioAverageGrade($scenario->getId());
+        } else {
+            $averageGrade = null;
+        }
 
         return $this->render('scenario/show.html.twig', [
-            'scenario'    => $scenario,
-            'review_form' => $reviewForm,
+            'scenario'      => $scenario,
+            'review_form'   => $reviewForm,
+            'average_grade' => $averageGrade,
         ]);
     }
 
