@@ -1,34 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} - {{ scenario.title }}
+	{{ parent() }}
+	-
+	{{ scenario.title }}
 {% endblock %}
 
 {% block body %}
-    <section>
-        <h1>{{ scenario.title }}</h1>
-    </section>
-    <section class="picture-container">
-        {% if scenario.imageName is empty %}
-            <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
-                 class="card-image">
-        {% else %}
-            <img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
-        {% endif %}
-    </section>
-    <article class="scenario-resume">
-        <p>{{ scenario.resume }}</p>
-    </article>
-    {{ render(path('scenario_reviews', {'scenario_id': scenario.id})) }}
-    {% if app.user %}
-        <section class="buttons-container">
-        <a href="{{ path('scenario_add_review', {'id': scenario.id}) }}" class="success-button">Ajouter un commentaire</a>
-        </section>
-    {% endif %}
-    <section class="buttons-container">
-        <a href="{{ path('scenario_index') }}" class="generic-button">Retour</a>
-    </section>
+	<section>
+		<h1>{{ scenario.title }}</h1>
+	</section>
+	<section class="picture-container">
+		{% if scenario.imageName is empty %}
+			<img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes" class="card-image">
+		{% else %}
+			<img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
+		{% endif %}
+	</section>
+	<article class="scenario-resume">
+		<p>{{ scenario.resume }}</p>
+	</article>
+	<section>
+		{% if average_grade is null %}
+			<p>Aucune note n'a été donnée pour ce scénario</p>
+		{% else %}
+			<p>La moyenne pour ce scénario est de
+				{{ average_grade }}</p>
+		{% endif %}
+	</section>
+	{{ render(path('scenario_reviews', {'scenario_id': scenario.id})) }}
+	{% if app.user %}
+		<section class="buttons-container">
+			<a href="{{ path('scenario_add_review', {'id': scenario.id}) }}" class="success-button">Ajouter un commentaire</a>
+		</section>
+	{% endif %}
+	<section class="buttons-container">
+		<a href="{{ path('scenario_index') }}" class="generic-button">Retour</a>
+	</section>
 {% endblock %}
-
-
-
