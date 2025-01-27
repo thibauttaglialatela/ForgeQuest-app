@@ -18,7 +18,7 @@
 		{% endif %}
 	</section>
 	<article class="scenario-resume">
-		<p>{{ scenario.resume }}</p>
+		<p>{{ scenario.resume|sanitize_html }}</p>
 	</article>
 	<section>
 		{% if average_grade is null %}

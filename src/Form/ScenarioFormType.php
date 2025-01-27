@@ -22,15 +22,17 @@ class ScenarioFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label'       => 'Titre du scénario',
-                'constraints' => [
+                'label'         => 'Titre du scénario',
+                'sanitize_html' => true,
+                'constraints'   => [
                     new NotBlank(message: 'N\'oublie pas le titre de ton scénario'),
                 ],
             ])
             ->add('resume', TextareaType::class, [
-                'attr'        => ['cols' => 50, 'rows' => 10],
-                'label'       => 'Le scénario',
-                'constraints' => [
+                'attr'          => ['cols' => 50, 'rows' => 10],
+                'label'         => 'Le scénario',
+                'sanitize_html' => true,
+                'constraints'   => [
                     new NotBlank(message: 'Et le scénario ?'),
                 ],
             ])
