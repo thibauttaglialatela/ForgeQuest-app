@@ -62,7 +62,7 @@ class Univers
     /**
      * @var Collection<int, Scenario>
      */
-    #[ORM\OneToMany(targetEntity: Scenario::class, mappedBy: 'univers', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Scenario::class, mappedBy: 'univers', cascade: ['remove'], orphanRemoval: true)]
     private Collection $scenarios;
 
     public function __construct()
