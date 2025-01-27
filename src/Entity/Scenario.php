@@ -67,7 +67,7 @@ class Scenario
     /**
      * @var Collection<int, Review>
      */
-    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'scenario')]
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'scenario', cascade: ['remove'])]
     private Collection $reviews;
 
     public function __construct()
