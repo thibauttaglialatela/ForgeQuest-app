@@ -1,0 +1,20 @@
+.ck-editor .ck-reset_all :not(.ck-reset_all-excluded *),
+.ck-editor .ck.ck-reset_all {
+    border-collapse: collapse;
+    font: $font-family-base;
+    text-align: left;
+    white-space: nowrap;
+    cursor: auto;
+    float: none;
+    color: white;
+}
+
+
+body .ck-editor .ck-toolbar {
+    background-color: $secondary-color;
+}
+
+  
+body .ck.ck-editor__main > .ck-editor__editable {
+    background-color: $third-color-lighter;
+}

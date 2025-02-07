@@ -7,9 +7,9 @@ namespace App\Form;
 use App\Entity\Scenario;
 use App\Entity\Tag;
 use App\Entity\Univers;
+use App\Form\Type\CKEditor5Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +28,7 @@ class ScenarioFormType extends AbstractType
                     new NotBlank(message: 'N\'oublie pas le titre de ton scénario'),
                 ],
             ])
-            ->add('resume', TextareaType::class, [
+            ->add('resume', CKEditor5Type::class, [
                 'attr'          => ['cols' => 50, 'rows' => 10],
                 'label'         => 'Le scénario',
                 'sanitize_html' => true,
