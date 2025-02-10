@@ -1,51 +1,43 @@
-import './bootstrap.js';
+import "./bootstrap.js";
 /*
  * Welcome to your app's main JavaScript file!
  *
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
-import './styles/app.scss';
+import "./styles/app.scss";
 
-console.log('welcome to AssetMapper! 🎉');
+console.log("welcome to AssetMapper! 🎉");
 
-const burgerMenu = document.querySelector('.burger-menu');
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ DOM entièrement chargé !");
 
-burgerMenu.addEventListener('click', () => {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-});
+  const burgerMenu = document.querySelector(".burger-menu");
 
-document.querySelector('.close-menu').addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.remove('active');
-});
-
-const deleteButtons = document.querySelectorAll('.delete-button');
-const popupDelete = document.querySelector('#popup-delete');
-const confirmYes = document.querySelector('#confirm-yes');
-const confirmNo = document.querySelector('#confirm-no');
-let currentForm = null; // Stocke le formulaire à soumettre
-
-// Associer un événement à chaque bouton de suppression
-deleteButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-         // Trouve le formulaire associé
-        currentForm = button.closest('form'); // Stocke le formulaire pour confirmation
-        popupDelete.classList.remove('hidden'); // Affiche la popup
+  if (burgerMenu) {
+    burgerMenu.addEventListener("click", () => {
+      const navLinks = document.querySelector(".nav-links");
+      navLinks.classList.toggle("active");
     });
-});
+  }
 
-// Gestion du bouton "Oui"
-confirmYes.addEventListener('click', () => {
-    if (currentForm) {
-        currentForm.submit(); // Soumet le formulaire si l'utilisateur confirme
+  let currentForm = null;
+  document.addEventListener("click", (event) => {
+    if (event.target.matches(".delete-button")) {
+      currentForm = event.target.closest("form");
+      document.querySelector("#popup-delete")?.classList.remove("hidden");
     }
-    popupDelete.classList.add('hidden'); // Cache la popup
-});
 
-// Gestion du bouton "Non"
-confirmNo.addEventListener('click', () => {
-    popupDelete.classList.add('hidden'); // Cache la popup sans soumettre
-    currentForm = null; // Réinitialise le formulaire
-});
+    if (event.target.matches("#confirm-yes")) {
+      if (currentForm) {
+        currentForm.submit();
+      }
+      document.querySelector("#popup-delete")?.classList.add("hidden");
+    }
 
+    if (event.target.matches("#confirm-no")) {
+      document.querySelector("#popup-delete")?.classList.add("hidden");
+      currentForm = null;
+    }
+  });
+});
