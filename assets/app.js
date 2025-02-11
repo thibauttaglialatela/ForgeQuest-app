@@ -10,7 +10,6 @@ import "./styles/app.scss";
 console.log("welcome to AssetMapper! 🎉");
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ DOM entièrement chargé !");
 
   const burgerMenu = document.querySelector(".burger-menu");
 

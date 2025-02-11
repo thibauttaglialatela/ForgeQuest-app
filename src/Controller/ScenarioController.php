@@ -146,10 +146,10 @@ class ScenarioController extends AbstractController
     public function deleteScenario(
         #[MapEntity(message: 'Le scénario n \'existe pas')]
         Scenario $scenario,
-        EntityManagerInterface $entityManager,
+        ScenarioRepository $scenarioRepository,
         Request $request,
     ): Response {
-        $token = $request->query->get('token');
+        $token = $request->request->get('_token');
         if (!is_string($token)) {
             $this->addFlash('danger', 'Token CSRF non valide');
 
@@ -157,11 +157,9 @@ class ScenarioController extends AbstractController
         }
 
         if ($this->isCsrfTokenValid('delete' . $scenario->getId(), $token)) {
-            $entityManager->remove($scenario);
-            $entityManager->flush();
+            $scenarioRepository->remove($scenario, true);
+            $this->addFlash('danger', 'Le scénario a été supprimé');
         }
-
-        $this->addFlash('danger', 'Le scénario a été supprimé');
 
         return $this->redirectToRoute('app_profile');
     }
