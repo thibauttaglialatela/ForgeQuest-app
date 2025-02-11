@@ -7,7 +7,7 @@ framework:
 
     #esi: true
     #fragments: true
-    csrf_protection: ~
+    csrf_protection: true
 
 when@test:
     framework:

@@ -18,6 +18,15 @@ class ScenarioRepository extends ServiceEntityRepository
         parent::__construct($registry, Scenario::class);
     }
 
+    public function remove(Scenario $scenario, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($scenario);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     //    /**
     //     * @return Scenario[] Returns an array of Scenario objects
     //     */
