@@ -229,11 +229,11 @@ return [
     'ckeditor5' => [
         'version' => '44.1.0',
     ],
-    'ckeditor5/dist/ckeditor5.min.css' => [
-        'version' => '44.1.0',
-        'type' => 'css',
-    ],
     'ckeditor5/translations/fr.js' => [
         'version' => '44.1.0',
+    ],
+    'ckeditor5/dist/ckeditor5.min.css' => [
+        'version' => '44.2.0',
+        'type' => 'css',
     ],
 ];
