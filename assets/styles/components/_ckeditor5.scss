@@ -1,20 +1,65 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@media print {
+	body {
+		margin: 0 !important;
+	}
+}
+
+.main-container {
+	font-family: 'Lato';
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ck-content {
+	font-family: 'Lato';
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+
+.editor-container_classic-editor .editor-container__editor {
+	min-width: 795px;
+	max-width: 795px;
+}
+
 .ck-editor .ck-reset_all :not(.ck-reset_all-excluded *),
 .ck-editor .ck.ck-reset_all {
     border-collapse: collapse;
-    font: $font-family-base;
+    background-color: $secondary-color;
+    font-family: $font-family-base;
     text-align: left;
     white-space: nowrap;
     cursor: auto;
     float: none;
-    color: white;
+    color: $white;
 }
 
 
-body .ck-editor .ck-toolbar {
-    background-color: $secondary-color;
-}
-
-  
 body .ck.ck-editor__main > .ck-editor__editable {
     background-color: $third-color-lighter;
 }
+
+
+[dir="ltr"] {
+	.ck {
+	  &.ck-button {
+		.ck-button__label {
+		  text-align: left;
+		  color: $white;
+		}
+	  }
+	}
+  
+	a.ck {
+	  &.ck-button {
+		.ck-button__label {
+		  text-align: left;
+		  color: $white;
+		}
+	  }
+	}
+  }
