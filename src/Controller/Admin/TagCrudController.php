@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -23,6 +23,10 @@ class TagCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return parent::configureActions($actions)
+        ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN,
+            fn (Action $action) => $action->setLabel('Sauvegarder'))
+        ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE,
+            fn (Action $action) => $action->setLabel('Sauvegarder et continuer'))
             ->update(Crud::PAGE_INDEX, Action::NEW,
                 fn (Action $action) => $action->setLabel('Ajouter un mot-clé'))
             ->disable(Action::DETAIL);
@@ -30,11 +34,14 @@ class TagCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id');
-        yield TextField::new('name');
-        yield CollectionField::new('scenarios')
-            ->allowDelete(false)
-        ;
+        yield IdField::new('id')->onlyOnIndex();
+        yield TextField::new('name', 'Nom');
+        yield AssociationField::new('scenarios', 'Scénarios')
+        ->setFormTypeOptions([
+            'by_reference' => false,
+            'multiple'     => true,
+            'choice_label' => 'title',
+        ]);
     }
 
     public function configureCrud(Crud $crud): Crud
