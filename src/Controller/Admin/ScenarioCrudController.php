@@ -35,8 +35,8 @@ class ScenarioCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->onlyOnIndex();
-        yield TextField::new('title');
-        yield DateTimeField::new('createdAt');
+        yield TextField::new('title')->setLabel('Titre');
+        yield DateTimeField::new('createdAt')->setLabel('Créé le')->onlyOnIndex();
         yield BooleanField::new('isPublished');
         yield TextEditorField::new('resume');
         yield ImageField::new('imageName', 'Illustration')
