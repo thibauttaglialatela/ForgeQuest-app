@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import '../styles/toggle_password.css';
+import '../styles/components/_toggle_password.scss';
 
 export default class extends Controller {
     static values = {

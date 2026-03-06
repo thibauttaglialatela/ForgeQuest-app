@@ -15,6 +15,11 @@ class GlobalCreatedAtListener
     {
     }
 
+    /**
+     * Undocumented function.
+     *
+     * @param BeforeEntityPersistedEvent<object> $beforeEntityPersistedEvent
+     */
     public function __invoke(BeforeEntityPersistedEvent $beforeEntityPersistedEvent): void
     {
         /** @var object $entity */

@@ -1554,10 +1554,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     embed_sourcemap?: bool|Param|null, // Deprecated: Option "embed_sourcemap" at "symfonycasts_sass.embed_sourcemap" is deprecated. Use "sass_options.embed_source_map" instead". // Default: null
  * }
- * @psalm-type LazyImageConfig = array{
- *     cache?: scalar|Param|null,
- *     fetch_image_content?: scalar|Param|null, // Default: null
- * }
  * @psalm-type SymfonycastsVerifyEmailConfig = array{
  *     lifetime?: int|Param, // The length of time in seconds that a signed URI is valid for after it is created. // Default: 3600
  * }
@@ -1674,7 +1670,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
  *     symfonycasts_sass?: SymfonycastsSassConfig,
- *     lazy_image?: LazyImageConfig,
  *     symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *     fos_ck_editor?: FosCkEditorConfig,
  *     vich_uploader?: VichUploaderConfig,
@@ -1696,7 +1691,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         maker?: MakerConfig,
  *         symfonycasts_sass?: SymfonycastsSassConfig,
- *         lazy_image?: LazyImageConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         fos_ck_editor?: FosCkEditorConfig,
  *         vich_uploader?: VichUploaderConfig,
@@ -1716,7 +1710,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         symfonycasts_sass?: SymfonycastsSassConfig,
- *         lazy_image?: LazyImageConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         fos_ck_editor?: FosCkEditorConfig,
  *         vich_uploader?: VichUploaderConfig,
@@ -1737,7 +1730,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         symfonycasts_sass?: SymfonycastsSassConfig,
- *         lazy_image?: LazyImageConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         dama_doctrine_test?: DamaDoctrineTestConfig,
  *         fos_ck_editor?: FosCkEditorConfig,
