@@ -37,7 +37,7 @@ class CreateAdminUserCommandTest extends TestCase
         );
 
         $application = new Application();
-        $application->add($command);
+        $application->addCommand($command);
 
         $this->commandTester = new CommandTester($application->find('app:create_admin_user'));
     }
