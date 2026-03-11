@@ -24,6 +24,7 @@
                 {{ asset('images/Home_page_1280.webp') }} 1280w"
                 src="{{ asset('images/Home_page_640.webp') }}"
                 alt="Vue depuis un tunnel d'un chateau flottant dans le ciel"
+                loading="lazy"
         />
     </section>
     {#    ajout des boutons explorer et Univers de jeu #}
@@ -43,10 +44,10 @@
                         <h3 class="card-title">{{ scenario.title }}</h3>
                     </header>
                     {% if scenario.imageName is empty %}
-                        <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes"
-                             class="card-image">
+                        <img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes" loading="lazy"
+                            class="card-image">
                     {% else %}
-                        <img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
+                        <img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" loading="lazy" class="card-image">
                     {% endif %}
                     <section class="card-tags">
                         <ul>
