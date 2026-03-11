@@ -12,9 +12,9 @@
 	</section>
 	<section class="picture-container">
 		{% if scenario.imageName is empty %}
-			<img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes" class="card-image">
+			<img src="{{ asset('images/black-dragon_640.webp') }}" alt="dragon noir entouré de flammes" loading="lazy" class="card-image">
 		{% else %}
-			<img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" class="card-image">
+			<img src="{{ vich_uploader_asset(scenario, 'imageFile') }}" alt="{{ scenario.imageAlt }}" loading="lazy" class="card-image">
 		{% endif %}
 	</section>
 	<article class="scenario-resume">

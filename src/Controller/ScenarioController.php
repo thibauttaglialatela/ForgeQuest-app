@@ -149,7 +149,7 @@ class ScenarioController extends AbstractController
         ScenarioRepository $scenarioRepository,
         Request $request,
     ): Response {
-        $token = $request->request->get('_token');
+        $token = $request->attributes->get('_token');
         if (!is_string($token)) {
             $this->addFlash('danger', 'Token CSRF non valide');
 
