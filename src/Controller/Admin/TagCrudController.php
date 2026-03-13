@@ -13,6 +13,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<Tag>
+ */
 class TagCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string

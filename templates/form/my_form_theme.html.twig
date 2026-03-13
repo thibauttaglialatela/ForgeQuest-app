@@ -34,6 +34,10 @@
     {{ block('form_widget_simple') }}
 {%- endblock password_widget -%}
 
+{%- block toggle_password_widget -%}
+    <div class="{{ toggle_container_classes|join(' ') }}">{{ block('password_widget') }}</div>
+{%- endblock toggle_password_widget -%}
+
 {% block form_help %}
     {% if help is not empty %}
         <small class="form-help">{{ help }}</small>

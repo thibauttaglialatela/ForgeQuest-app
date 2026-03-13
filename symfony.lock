@@ -376,9 +376,6 @@
             "config/packages/lazy_image.yaml"
         ]
     },
-    "symfony/ux-toggle-password": {
-        "version": "v2.21.0"
-    },
     "symfony/ux-turbo": {
         "version": "v2.20.0"
     },

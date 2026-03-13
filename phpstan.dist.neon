@@ -1,4 +1,17 @@
 parameters:
+    ignoreErrors:
+    -
+        message: '#Method Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\App::config\(\) has parameter \$config with no value type specified#'
+        path: %currentWorkingDirectory%/config/reference.php
+    -
+        message: '#Method Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\App::config\(\) return type has no value type specified#'
+        path: %currentWorkingDirectory%/config/reference.php
+    -
+        message: '#PHPDoc tag @param for parameter \$config with type mixed is not subtype of native type array#'
+        path: %currentWorkingDirectory%/config/reference.php
+    -
+        message: '#PHPDoc tag @return with type mixed is not subtype of native type array#'
+        path: %currentWorkingDirectory%/config/reference.php
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
     level: 8

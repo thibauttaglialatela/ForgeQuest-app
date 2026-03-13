@@ -16,6 +16,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
+/**
+ * @extends AbstractCrudController<Review>
+ */
 final class ReviewCrudController extends AbstractCrudController
 {
     public function configureActions(Actions $actions): Actions

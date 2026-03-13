@@ -17,6 +17,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<Scenario>
+ */
 class ScenarioCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
