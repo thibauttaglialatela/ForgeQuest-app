@@ -74,6 +74,7 @@ jobs:
         env:
           KERNEL_CLASS: 'App\Kernel'
           DATABASE_URL: mysql://user_test:password_test@127.0.0.1:3306/forgequest_db?serverVersion=8.0.32&charset=utf8mb4
+          SYMFONY_DEPRECATIONS_HELPER: weak
         run: ./bin/phpunit tests
 
       - name: Run PHPstan
