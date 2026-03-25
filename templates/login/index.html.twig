@@ -16,7 +16,7 @@
             <div class="form-row">
                 <label for="username" class="form-label">e-mail</label>
                 <input class="form-widget-simple" type="text" id="username" name="_username"
-                       value="{{ last_username }}" required>
+                    value="{{ last_username }}" required>
             </div>
             <div class="form-row">
                 <label for="password" class="form-label">Mot de passe</label>
@@ -26,11 +26,6 @@
                             type="password"
                             id="password"
                             name="_password"
-                            {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
-                                visibleLabel: 'Afficher',
-                                hiddenLabel: 'Cacher',
-                                buttonClasses: ['toggle-password-button'],
-                            }) }}
                             required>
                 </div>
             </div>

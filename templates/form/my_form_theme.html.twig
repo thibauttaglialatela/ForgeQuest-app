@@ -23,16 +23,11 @@
 {%- block form_widget_simple -%}
     {%- set type = type|default('text') -%}
     {%- if type == 'range' or type == 'color' -%}
-        {# Attribute "required" is not supported #}
         {%- set required = false -%}
     {%- endif -%}
     <input class="form-widget-simple" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {%- endblock form_widget_simple -%}
 
-{%- block password_widget -%}
-    {%- set type = type|default('password') -%}
-    {{ block('form_widget_simple') }}
-{%- endblock password_widget -%}
 
 {%- block toggle_password_widget -%}
     <div class="{{ toggle_container_classes|join(' ') }}">{{ block('password_widget') }}</div>

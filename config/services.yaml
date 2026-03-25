@@ -24,3 +24,4 @@ services:
     App\EventListener\GlobalCreatedAtListener:
         tags:
             - { name: kernel.event_listener, event: 'easy_admin.event.before_entity_persisted' }
+
