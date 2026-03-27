@@ -6,6 +6,8 @@ import "./bootstrap.js";
  * which should already be in your base.html.twig.
  */
 import "./styles/app.scss";
+import './controllers/toggle_password_controller.js';
+
 
 console.log("welcome to AssetMapper! 🎉");
 

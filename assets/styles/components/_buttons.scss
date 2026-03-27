@@ -33,32 +33,3 @@
   font-weight: $font-weight-bold;
   border-radius: 6px;
 }
-
-// Conteneur principal du champ mot de passe
-.toggle-password-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-
-  .toggle-password-button {
-    background: none;
-    border: none;
-    color: $third-color;
-    cursor: pointer;
-    font-size: 0.85rem;
-
-    &:hover {
-      color: darken($third-color, 50%);
-    }
-  }
-
-  // Champ input
-  input {
-    width: 100%;
-    padding-right: 50px; // Réserver de l'espace pour le bouton toggle
-    box-sizing: border-box; // Assurer que le padding ne dépasse pas la largeur
-  }
-
-}
-
-
