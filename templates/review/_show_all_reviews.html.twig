@@ -5,7 +5,6 @@
 <section class="reviews-container">
     {% if reviews is not empty  %}
     {% for review in reviews %}
-{#    {{ dump(review) }}#}
         <article class="review-card">
             <div class="review-card_header">
                 <span class="review-card_author">Auteur : {{ review.author }}</span>
@@ -18,7 +17,13 @@
                 <span class="review-card_grade">Note : {{ review.grade }}</span>
             </div>
         </article>
+                {% if app.user %}
+		<section class="buttons-container">
+			<a href="{{ path('scenario_delete_review', {'id': review.id, 'scenario': scenario.id}) }}" class="danger-button">Supprimer le commentaire</a>
+		</section>
+	    {% endif %}
     {% endfor %}
+
     {% endif %}
 </section>
 {% endblock %}

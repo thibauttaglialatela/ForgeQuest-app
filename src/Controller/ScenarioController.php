@@ -131,13 +131,40 @@ class ScenarioController extends AbstractController
         ]);
     }
 
-    #[Route('/{scenario_id}/all-reviews', name: 'reviews')]
-    public function showAllReviews(ReviewRepository $reviewRepository, int $scenario_id): Response
+    #[Route('/{scenario}/delete/review/{id}', name: 'delete_review', methods: ['GET'])]
+    public function deleteReview(EntityManagerInterface $entityManager, int $id, Scenario $scenario): Response
     {
-        $reviews = $reviewRepository->findBy(['scenario' => $scenario_id, 'isPublished' => true]);
+        try {
+            $review = $entityManager->getRepository(Review::class)->findOneBy(['scenario' => $scenario, 'id' => $id]);
+
+            if (!$review) {
+                throw new \LogicException('Review not found');
+            }
+
+            if ($review->getAuthor() !== $this->getUser()) {
+                throw $this->createAccessDeniedException('Seul l\'auteur du commentaire ou un administrateur peut supprimer ce commentaire');
+            }
+            $entityManager->remove($review);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le commentaire a été supprimé avec succés');
+
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
+        } catch (\LogicException $exception) {
+            $this->addFlash('error', $exception->getMessage());
+
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
+        }
+    }
+
+    #[Route('/{scenario_id}/all-reviews', name: 'reviews')]
+    public function showAllReviews(ReviewRepository $reviewRepository, int $scenario_id, EntityManagerInterface $entityManager): Response
+    {
+        $reviews  = $reviewRepository->findBy(['scenario' => $scenario_id, 'isPublished' => true]);
+        $scenario = $entityManager->getRepository(Scenario::class)->find($scenario_id);
 
         return $this->render('review/_show_all_reviews.html.twig', [
-            'reviews' => $reviews,
+            'reviews'  => $reviews,
+            'scenario' => $scenario,
         ]);
     }
 
