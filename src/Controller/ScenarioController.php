@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -131,29 +132,36 @@ class ScenarioController extends AbstractController
         ]);
     }
 
-    #[Route('/{scenario}/delete/review/{id}', name: 'delete_review', methods: ['GET'])]
-    public function deleteReview(EntityManagerInterface $entityManager, int $id, Scenario $scenario): Response
-    {
-        try {
-            $review = $entityManager->getRepository(Review::class)->findOneBy(['scenario' => $scenario, 'id' => $id]);
-
-            if (!$review) {
-                throw new \LogicException('Review not found');
-            }
-
-            if ($review->getAuthor() !== $this->getUser()) {
-                throw $this->createAccessDeniedException('Seul l\'auteur du commentaire ou un administrateur peut supprimer ce commentaire');
-            }
-            $entityManager->remove($review);
-            $entityManager->flush();
-            $this->addFlash('success', 'Le commentaire a été supprimé avec succés');
-
-            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
-        } catch (\LogicException $exception) {
-            $this->addFlash('error', $exception->getMessage());
+    #[Route('/{scenario}/delete/review/{id}', name: 'delete_review', methods: ['POST'])]
+    public function deleteReview(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        #[MapEntity(mapping: ['id' => 'id'])] Review $review,
+        Scenario $scenario,
+    ): Response {
+        $token = $request->getPayload()->getString('_token');
+        if (!$this->isCsrfTokenValid('delete_review_' . $review->getId(), $token)) {
+            $this->addFlash('error', 'Jeton CSRF invalide');
 
             return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
         }
+
+        $isAuthor = $review->getAuthor() === $this->getUser();
+        $isAdmin  = $this->isGranted('ROLE_ADMIN');
+
+        if (!$isAuthor && !$isAdmin) {
+            throw new AccessDeniedHttpException('Droits insuffisants pour supprimer ce commentaire.');
+        }
+
+        try {
+            $entityManager->remove($review);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le commentaire a été supprimé avec succés');
+        } catch (AccessDeniedHttpException $err) {
+            $this->addFlash('error', 'Une erreur est survenue lors de la suppression');
+        }
+
+        return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
     }
 
     #[Route('/{scenario_id}/all-reviews', name: 'reviews')]

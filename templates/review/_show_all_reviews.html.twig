@@ -1,29 +1,39 @@
 {% block body %}
-    <section>
-        <h2>Commentaires</h2>
-    </section>
-<section class="reviews-container">
-    {% if reviews is not empty  %}
-    {% for review in reviews %}
-        <article class="review-card">
-            <div class="review-card_header">
-                <span class="review-card_author">Auteur : {{ review.author }}</span>
-                <span class="review-card_date">Créé le {{ review.createdAt|date('d F Y', 'Europe/Paris') }}</span>
-            </div>
-            <div class="review-card_content">
-                <p>{{ review.comment }}</p>
-            </div>
-            <div class="review-card_footer">
-                <span class="review-card_grade">Note : {{ review.grade }}</span>
-            </div>
-        </article>
-                {% if app.user %}
-		<section class="buttons-container">
-			<a href="{{ path('scenario_delete_review', {'id': review.id, 'scenario': scenario.id}) }}" class="danger-button">Supprimer le commentaire</a>
-		</section>
-	    {% endif %}
-    {% endfor %}
+	<section>
+		<h2>Commentaires</h2>
+	</section>
+	<section class="reviews-container">
+		{% if reviews is not empty  %}
+			{% for review in reviews %}
+				<article class="review-card">
+					<div class="review-card_header">
+						<span class="review-card_author">Auteur :
+							{{ review.author }}</span>
+						<span class="review-card_date">Créé le
+							{{ review.createdAt|date('d F Y', 'Europe/Paris') }}</span>
+					</div>
+					<div class="review-card_content">
+						<p>{{ review.comment }}</p>
+					</div>
+					<div class="review-card_footer">
+						<span class="review-card_grade">Note :
+							{{ review.grade }}</span>
+					</div>
+				</article>
+				{% if app.user %}
+					<section class="buttons-container">
 
-    {% endif %}
-</section>
+						<form action="{{ path('scenario_delete_review', {'id': review.id, 'scenario': scenario.id})}}" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete_review_' ~ review.id) }}">
+
+							<button type="submit" class="danger-button">
+								Supprimer le commentaire
+							</button>
+						</form>
+					</section>
+				{% endif %}
+			{% endfor %}
+
+		{% endif %}
+	</section>
 {% endblock %}
