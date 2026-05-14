@@ -139,18 +139,17 @@ class ScenarioController extends AbstractController
         #[MapEntity(mapping: ['id' => 'id'])] Review $review,
         Scenario $scenario,
     ): Response {
-        $token = $request->getPayload()->getString('_token');
-        if (!$this->isCsrfTokenValid('delete_review_' . $review->getId(), $token)) {
-            $this->addFlash('error', 'Jeton CSRF invalide');
+        if (!$this->isGranted('delete', $review)) {
+            $this->addFlash('danger', 'Vous n\'avez pas les droits pour supprimer ce commentaire');
 
             return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
         }
 
-        $isAuthor = $review->getAuthor() === $this->getUser();
-        $isAdmin  = $this->isGranted('ROLE_ADMIN');
+        $token = $request->getPayload()->getString('_token');
+        if (!$this->isCsrfTokenValid('delete_review_' . $review->getId(), $token)) {
+            $this->addFlash('danger', 'Jeton CSRF invalide');
 
-        if (!$isAuthor && !$isAdmin) {
-            throw new AccessDeniedHttpException('Droits insuffisants pour supprimer ce commentaire.');
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
         }
 
         try {
