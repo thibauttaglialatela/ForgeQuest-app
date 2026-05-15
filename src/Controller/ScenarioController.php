@@ -163,6 +163,36 @@ class ScenarioController extends AbstractController
         return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
     }
 
+    #[Route('/{scenario}/update/review/{id}', name: 'update_review', methods: ['GET', 'POST'])]
+    public function updateReview(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        #[MapEntity(mapping: ['id' => 'id'])]
+        Review $review, Scenario $scenario,
+    ): Response {
+        if (!$this->isGranted('edit', $review)) {
+            $this->addFlash('danger', 'Vous n\'avez pas les droits pour modifier ce commentaire');
+
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
+        }
+
+        $form = $this->createForm(ReviewType::class, $review);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Le commentaire a été modifié');
+
+            return $this->redirectToRoute('scenario_show', ['id' => $scenario->getId()]);
+        }
+
+        return $this->render('review/add.html.twig', [
+            'review_form' => $form,
+            'scenario'    => $scenario,
+        ]);
+    }
+
     #[Route('/{scenario_id}/all-reviews', name: 'reviews')]
     public function showAllReviews(ReviewRepository $reviewRepository, int $scenario_id, EntityManagerInterface $entityManager): Response
     {
