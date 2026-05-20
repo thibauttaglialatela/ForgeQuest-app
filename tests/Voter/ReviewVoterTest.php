@@ -9,7 +9,6 @@ use App\Entity\User;
 use App\Voter\ReviewVoter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 final class ReviewVoterTest extends TestCase
@@ -22,23 +21,24 @@ final class ReviewVoterTest extends TestCase
         return $token;
     }
 
-    public function testAnotherUserCannotReview(): void
+    private function createReviewWithAuthor(User $author): Review
+    {
+        $review = new Review();
+        $review->setAuthor($author);
+        $review->setComment('Super scénario !');
+        $review->setGrade(4);
+        $review->setCreatedAt(new \DateTimeImmutable());
+
+        return $review;
+    }
+
+    public function testAnotherUserCannotDeleteAReview(): void
     {
         $author = $this->createMock(User::class);
         $hacker = $this->createMock(User::class);
-
-        $currentDate = new \DateTimeImmutable();
-        $review      = new Review();
-        $review->setAuthor($author);
-        $review->setComment('commentaire');
-        $review->setGrade(3);
-        $review->setCreatedAt($currentDate);
-
-        $authChecker = $this->createMock(AuthorizationCheckerInterface::class);
-        $authChecker->method('isGranted')->willReturn(false);
+        $review = $this->createReviewWithAuthor($author);
 
         $voter = new ReviewVoter();
-
         $token = $this->createToken($hacker);
 
         $result = $voter->vote($token, $review, [ReviewVoter::DELETE]);
@@ -49,23 +49,27 @@ final class ReviewVoterTest extends TestCase
     public function testUserCanDeleteHisOwnReview(): void
     {
         $author = $this->createMock(User::class);
-
-        $currentDate = new \DateTimeImmutable();
-        $review      = new Review();
-        $review->setAuthor($author);
-        $review->setComment('commentaire');
-        $review->setGrade(3);
-        $review->setCreatedAt($currentDate);
-
-        $authChecker = $this->createMock(AuthorizationCheckerInterface::class);
-        $authChecker->method('isGranted')->willReturn(true);
+        $review = $this->createReviewWithAuthor($author);
 
         $voter = new ReviewVoter();
-
         $token = $this->createToken($author);
 
         $result = $voter->vote($token, $review, [ReviewVoter::DELETE]);
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
+    }
+
+    public function testAnotherUserCannotEditAReview(): void
+    {
+        $author = $this->createMock(User::class);
+        $hacker = $this->createMock(User::class);
+        $review = $this->createReviewWithAuthor($author);
+
+        $voter = new ReviewVoter();
+        $token = $this->createToken($hacker);
+
+        $result = $voter->vote($token, $review, [ReviewVoter::EDIT]);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
 }

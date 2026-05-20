@@ -13,10 +13,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ReviewVoter extends Voter
 {
     public const DELETE = 'delete';
+    public const EDIT   = 'edit';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, [self::DELETE], true)) {
+        if (!in_array($attribute, [self::DELETE, self::EDIT], true)) {
             return false;
         }
 
@@ -42,11 +43,25 @@ class ReviewVoter extends Voter
 
         return match ($attribute) {
             self::DELETE => $this->canDelete($review, $user, $vote),
+            self::EDIT   => $this->canEdit($review, $user, $vote),
             default      => throw new \LogicException('This code should not be reached!'),
         };
     }
 
     private function canDelete(Review $review, User $user, ?Vote $vote): bool
+    {
+        if ($user === $review->getAuthor()) {
+            return true;
+        }
+
+        $vote?->addReason(sprintf(
+            'L\'utilsateur connecté (email: %s) n\'est pas celui qui a créé ce commentaire (id: %d).', $user->getEmail(), $review->getId()
+        ));
+
+        return false;
+    }
+
+    private function canEdit(Review $review, User $user, ?Vote $vote): bool
     {
         if ($user === $review->getAuthor()) {
             return true;

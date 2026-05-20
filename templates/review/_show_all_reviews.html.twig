@@ -11,6 +11,9 @@
 							{{ review.author }}</span>
 						<span class="review-card_date">Créé le
 							{{ review.createdAt|date('d F Y', 'Europe/Paris') }}</span>
+							{% if review.updatedAt is not null%}
+							<span class="review_card_date">Mis à jour le {{ review.updatedAt|date('d F Y', 'Europe/Paris') }}</span>
+							{% endif %}
 					</div>
 					<div class="review-card_content">
 						<p>{{ review.comment }}</p>
@@ -20,7 +23,7 @@
 							{{ review.grade }}</span>
 					</div>
 				</article>
-				{% if app.user %}
+				{% if app.user and app.user.id == review.author.id %}
 					<section class="buttons-container">
 
 						<form action="{{ path('scenario_delete_review', {'id': review.id, 'scenario': scenario.id})}}" method="post">
@@ -30,6 +33,10 @@
 								Supprimer le commentaire
 							</button>
 						</form>
+					</section>
+					{# ajout du bouton mise à jour #}
+					<section class="buttons-container">
+					<a href="{{ path('scenario_update_review', {'id': review.id, 'scenario': scenario.id}) }}" class="success-button">Editer un commentaire</a>
 					</section>
 				{% endif %}
 			{% endfor %}
